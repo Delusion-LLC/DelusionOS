@@ -18,7 +18,6 @@
 - Biometric Devices
 - Windows Backup/Restore Points
 - Embedded Mode
-- Easy Transfer
 - Hyper-V
 - Remote Desktop Services
 - Windows Subsystem for Linux
@@ -37,7 +36,6 @@
 - Azure Active Directory Join
 - Storage Spaces
 - Remote Access
-- The Get Started and Windows Backup apps
 - Telemetry
 - Telephony
 - NFC/POS devices
