@@ -17,24 +17,14 @@
 - Windows Firewall
 - Biometric Devices
 - Windows Backup/Restore Points
-- Embedded Mode
 - Hyper-V
 - Remote Desktop Services
 - Windows Subsystem for Linux
-- Device Guard
-- Credential Guard
-- AppLocker
-- Windows Information Protection
-- Group Policy Management
 - Windows Sandbox
 - Windows Autopilot/Recall
-- DirectAccess
-- BranchCache
 - App-V (Application Virtualization)
 - User Experience Virtualization (UE-V)
 - Microsoft Store
-- Azure Active Directory Join
-- Storage Spaces
 - Remote Access
 - Telemetry
 - Telephony
@@ -43,7 +33,7 @@
 - Cortana
 - Windows update
 - Windows recovery
-#### 37 components disabled or removed
+#### 25 components disabled or removed
 
 ## 🔗 Links
 - [Website](https://deluos.vercel.app/)
