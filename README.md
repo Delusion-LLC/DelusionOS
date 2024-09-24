@@ -45,7 +45,7 @@
 - Cortana
 - Windows update
 - Windows recovery
-#### 41 components disabled or removed
+#### 37 components disabled or removed
 
 ## 🔗 Links
 - [Website](https://deluos.vercel.app/)
