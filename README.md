@@ -6,7 +6,7 @@
 <p>- Insert the flash drive in USB port PC, Download Rufus or Ventoy, Open Rufus or Ventoy app, load ISO into the app, After everything is loaded, go to reboot in BIOS, Once in the BIOS, navigate to the Boot options, In the Boot menu, locate the Windows Boot Manager option, Select your flash drive as the first boot device, Save the changes and exit the BIOS, Your PC will restart, and you should boot from the flash drive to start the installation process.</p>
 
 <h4>🤔 What are the system requirements for DelusionOS?</h4>
-<p>- The minimum system requirements include: 4GB of RAM, 40GB of available disk space, and a processor that supports 64-bit architecture.</p>
+<p>- The minimum system requirements include: 2GB of RAM, 40GB of available disk space, and a processor that supports 64-bit architecture.</p>
 
 ## Unsupported List:
 - Manual Installation Through setup.exe (Rufus or Ventoy)
