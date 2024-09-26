@@ -9,7 +9,7 @@
 <p>- The minimum system requirements include: 4GB of RAM, 40GB of available disk space, and a processor that supports 64-bit architecture.</p>
 
 ## Unsupported List:
-- Manual Installation Through setup.exe
+- Manual Installation Through setup.exe (Rufus or Ventoy)
 - Bitlocker Drive Encryption
 - Windows To Go
 - Windows Defender
@@ -17,15 +17,11 @@
 - Windows Firewall
 - Biometric Devices
 - Windows Backup/Restore Points
-- Hyper-V
-- Remote Desktop Services
 - Windows Subsystem for Linux
 - Windows Sandbox
 - Windows Autopilot/Recall
-- App-V (Application Virtualization)
-- User Experience Virtualization (UE-V)
+- Hyper-V
 - Microsoft Store
-- Remote Access
 - Telemetry
 - Telephony
 - NFC/POS devices
@@ -33,7 +29,7 @@
 - Cortana
 - Windows update
 - Windows recovery
-#### 25 components disabled or removed
+#### 20 components disabled or removed
 
 ## 🔗 Links
 - [Website](https://deluos.vercel.app/)
