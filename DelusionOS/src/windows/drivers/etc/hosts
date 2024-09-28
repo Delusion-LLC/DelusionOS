@@ -844,6 +844,7 @@ ff02::3		ip6-allhosts
 0.0.0.0 8168974.fls.doubleclick.net
 0.0.0.0 8397396.fls.doubleclick.net
 0.0.0.0 s0.doubleclick.net
+0.0.0.0 mediavisor.doubleclick.net
 0.0.0.0 googleads.g.doubleclick.net
 0.0.0.0 googleads4.g.doubleclick.net
 0.0.0.0 accounts.doubleclick.net
@@ -923,7 +924,6 @@ ff02::3		ip6-allhosts
 0.0.0.0 adserver.unityads.unity3d.com
 0.0.0.0 adservetx.media.net
 0.0.0.0 adservice.google.co.uk
-# 0.0.0.0 adservice.google.com
 0.0.0.0 adservice.google.ge
 0.0.0.0 adservice.google.ru
 0.0.0.0 adservice.google.ga
@@ -991,6 +991,7 @@ ff02::3		ip6-allhosts
 0.0.0.0 analytics.facebook.com
 0.0.0.0 analytics.ff.avast.com
 0.0.0.0 analytics.google.com
+0.0.0.0 click.googleanalytics.com
 0.0.0.0 analytics.libertymutual.com.edgekey.net
 0.0.0.0 analytics.modul.ac.at
 0.0.0.0 analytics.pinterest.com
@@ -1058,6 +1059,7 @@ ff02::3		ip6-allhosts
 0.0.0.0 economylube.com
 0.0.0.0 errorconnect.webcam
 0.0.0.0 euyexxwe.com
+0.0.0.0 events.reddit.com
 0.0.0.0 events.redditmedia.com
 0.0.0.0 fasterpropertybuyers.co.uk
 0.0.0.0 fastframe.com.br
@@ -1142,7 +1144,9 @@ ff02::3		ip6-allhosts
 0.0.0.0 p4-fbm4tfy4du3vk-rsg77dtzm53vwr6ks-854535-i2-v6exp3.ds.metric.gstatic.com 
 0.0.0.0 page-confrim-safe.ml
 0.0.0.0 pagead.googlesyndication.com
+0.0.0.0 pagead2.googleadservices.com
 0.0.0.0 pagead.l.doubleclick.net
+0.0.0.0 afs.googlesyndication.com
 0.0.0.0 pagead1.googlesyndication.com
 0.0.0.0 pagead2.googlesyndication.com
 0.0.0.0 pagead46.l.doubleclick.net
@@ -6986,8 +6990,6 @@ ff02::3		ip6-allhosts
 0.0.0.0 adserv.geocomm.com
 0.0.0.0 adserv.iafrica.com
 0.0.0.0 adservice.google.ca
-0.0.0.0 adservice.google.com
-0.0.0.0 adservice.google.com.au
 0.0.0.0 adservice.google.nl
 0.0.0.0 adservices.google.com
 0.0.0.0 adservices.picadmedia.com
