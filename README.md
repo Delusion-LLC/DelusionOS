@@ -36,7 +36,7 @@
 - [Discord](https://dsc.gg/delusionos/)
 - [Tg channel](https://t.me/DelusionOS/)
 
-## ©️ Credits
+## ©️ Acknowledgments
 [clqwnless](https://github.com/clqwnless),
 [couwthynokap](https://github.com/couwthynokap),
 [hickerdicker](https://github.com/hickerdicker),
