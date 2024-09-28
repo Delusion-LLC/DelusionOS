@@ -1,4 +1,4 @@
-﻿# If there is a domain name you would rather never see, simply add a line
+# If there is a domain name you would rather never see, simply add a line
 # that reads "0.0.0.0 machine.domain.tld". This will have the effect of
 # redirecting any requests to that host to your own computer. For example
 # this will prevent your browser from downloading banner ads, or sending
@@ -840,6 +840,13 @@ ff02::3		ip6-allhosts
 #Added By Revision - non-related to Microsoft
 #0.0.0.0 remote-auth-gateway.discord.gg // Breaks Discord QR
 #0.0.0.0 www.googleadservices.com // Breaks shopping search
+0.0.0.0 5290727.fls.doubleclick.net
+0.0.0.0 8168974.fls.doubleclick.net
+0.0.0.0 8397396.fls.doubleclick.net
+0.0.0.0 s0.doubleclick.net
+0.0.0.0 googleads.g.doubleclick.net
+0.0.0.0 googleads4.g.doubleclick.net
+0.0.0.0 accounts.doubleclick.net
 0.0.0.0 4967133.fls.doubleclick.net
 0.0.0.0 6498008.fls.doubleclick.net
 0.0.0.0 aax-us-east.amazon-adsystem.com
@@ -947,6 +954,7 @@ ff02::3		ip6-allhosts
 0.0.0.0 adwired.mobi
 0.0.0.0 adwods.com
 0.0.0.0 adx.g.doubleclick.net
+0.0.0.0 cm.g.doubleclick.net
 0.0.0.0 adz.mobi
 0.0.0.0 adzerk.net
 0.0.0.0 adzmedia.com
@@ -1111,6 +1119,7 @@ ff02::3		ip6-allhosts
 0.0.0.0 logfiles.zoom.us
 0.0.0.0 lord16.com
 0.0.0.0 mads.amazon-adsystem.com
+0.0.0.0 ads.google.com
 0.0.0.0 mail-ads.google.com
 0.0.0.0 malengotours.com
 0.0.0.0 matjournal.com
@@ -5152,6 +5161,7 @@ ff02::3		ip6-allhosts
 0.0.0.0 nba.112.2o7.net
 0.0.0.0 neber.112.2o7.net
 0.0.0.0 netrp.112.2o7.net
+0.0.0.0 dart.l.doubleclick.net
 0.0.0.0 netsdartboards.122.2o7.net
 0.0.0.0 newsinteractive.112.2o7.net
 0.0.0.0 newstimeslivecom.112.2o7.net
