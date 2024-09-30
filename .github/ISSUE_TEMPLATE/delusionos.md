@@ -1,6 +1,6 @@
 ---
 name: DelusionOS
-about: Describe this issue template's purpose here.
+about: Describe about a problem or something to add to the project our.
 title: NEW [BUG]
 labels: bug, question, services, tweaks
 assignees: ''
