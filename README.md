@@ -41,4 +41,5 @@
 [couwthynokap](https://github.com/couwthynokap),
 [hickerdicker](https://github.com/hickerdicker),
 [imribiy](https://github.com/imribiy),
+[ChrisTitusTech](https://github.com/ChrisTitusTech),
 AMITXV
