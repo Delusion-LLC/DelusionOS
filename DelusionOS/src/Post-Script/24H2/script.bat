@@ -1,6 +1,6 @@
 @echo off & SETLOCAL EnableDelayedExpansion & title POST-INSTALL
 mode con: cols=99 lines="20"
-:: version 0.8 dev
+:: version 0.9 dev
 
 call :Colors
 
@@ -257,9 +257,9 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\BFE" /v "Start" /t REG_DWORD /d 
 reg add "HKLM\SYSTEM\CurrentControlSet\services\EFS" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\dmwappushservice" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\Beep" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\services\P9RdrService" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg delete "HKLM\SYSTEM\CurrentControlSet\services\P9RdrService" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\ShellHWDetection" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\services\PenService" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg delete "HKLM\SYSTEM\CurrentControlSet\services\PenService" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\GraphicsPerfSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\GpuEnergyDrv" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\NcbService" /v "Start" /t REG_DWORD /d "4" /f >nul
