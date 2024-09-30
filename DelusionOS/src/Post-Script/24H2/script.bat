@@ -1,5 +1,6 @@
 @echo off & SETLOCAL EnableDelayedExpansion & title POST-INSTALL
 mode con: cols=99 lines="20"
+:: version 0.8 dev
 
 call :Colors
 
@@ -45,6 +46,7 @@ C:\Users\Default\Desktop\Post-Install\Tweaks\NSudo.exe --NoLogo --TrustedInstall
 :: couwthynokap
 :: HickerDicker
 :: imribiy
+:: ChrisTitusTech
 :: AMITXV
 
 :: Disabling task manager to prevent random access
@@ -283,6 +285,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\wscsvc" /v "Start" /t REG_DWORD 
 reg add "HKLM\SYSTEM\CurrentControlSet\services\Vid" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\RemoteAccess" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\RemoteRegistry" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg delete "HKLM\SYSTEM\CurrentControlSet\services\ssh-agent" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\p2pimsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\p2psvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\AxInstSV" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -298,6 +301,10 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\DmEnrollmentSvc" /v "Start" /t R
 reg add "HKLM\SYSTEM\CurrentControlSet\services\Wecsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\UsoSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\IKEEXT" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\AppVClient" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\AssignedAccessManagerSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\shpamsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\uhssvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\WmanSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\AppXSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\StorSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -321,10 +328,11 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\WSearch" /v "Start" /t REG_DWORD
 reg add "HLKM\SYSTEM\CurrentControlSet\services\WindowsTrustedRT" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HLKM\SYSTEM\CurrentControlSet\services\WindowsTrustedRTProxy" /v "Start" /t REG_DWORD /d "4" /f >nul
 
-
 :: --- TWEAKS REGEDIT/GPEDIT ---
 & echo. & echo  !S_GRAY!Configuring tweaks regedit...
 @REM Creator couwthynokap
+Reg.exe add "HKLM:\Software\Microsoft\PolicyManager\default\WiFi" /v "AllowWiFiHotSpotReporting" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM:\Software\Microsoft\PolicyManager\default\WiFi" /v "AllowAutoConnectToWiFiSenseHotspots" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "CEIPEnable" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoDriveTypeAutoRun" /t REG_DWORD /d "255" /f >nul
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "DisableCloudContent" /t REG_DWORD /d "1" /f >nul
