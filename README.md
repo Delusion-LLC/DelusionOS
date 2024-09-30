@@ -34,7 +34,8 @@
 ## 🔗 Links
 - [Website](https://deluos.vercel.app/)
 - [Discord](https://dsc.gg/delusionos/)
-- [Tg channel](https://t.me/DelusionOS/)
+- [Telegram](https://t.me/DelusionOS/)
+- [Twitter](https://x.com/DelusionLLC)
 
 ## ©️ Acknowledgments
 [clqwnless](https://github.com/clqwnless),
