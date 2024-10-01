@@ -1,5 +1,4 @@
-@echo off & SETLOCAL EnableDelayedExpansion & title POST-INSTALL
-mode con: cols=99 lines="20"
+@echo off && SETLOCAL EnableDelayedExpansion && title POST-INSTALL && mode con: cols=99 lines="20"
 :: version 0.9 dev
 
 call :Colors
@@ -8,31 +7,28 @@ taskkill /f /im explorer.exe > NUl 2>&1 & timeout /t 2 /nobreak >NUL 2&1 & start
 
 echo. & echo. & echo.
 
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&JY&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&#J~~J#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&G7~~~~7G&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&GJ~~~~~~~~JG&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&BY7~~~~~~~~~~~~75B&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&#PJ!~~~~~~~~~~!JP#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&#P#&#P7~~~~~~7P#&BP&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7~?P#&P7~~7P&#5?~7&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&P~~~7#@#JJ#@#7~~~P&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&Y~~!###&&#&#!~~5&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&P!!##7GP7##!!P&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&#5#&J~~J&#P#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&#77#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&##&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-:: echo &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+echo @@@@@@@@@@@@@@J5@@@@@@@@@@@@@@ 
+echo @@@@@@@@@@@@@Y~~P@@@@@@@@@@@@@
+echo @@@@@@@@@@@@Y~~~~5@@@@@@@@@@@@
+echo @@@@@@@@@@#?~~~~~~?#@@@@@@@@@@
+echo @@@@@@@@&5!~~~~~~~~!G@@@@@@@@@
+echo @@@@@@&P7~~~~~~~~~~~~?G@@@@@@@
+echo @@@@&P7~~~~~~~~~~~~~~~~?G&@@@@
+echo @#PJ!~~~~~~~~~~~~~~~~~~~~!YG&@
+echo BJ~~~~~~~~~~~~~~~~~~~~~~~~~!Y#
+echo @@&GJ!~~~~~~~~~~~~~~~~~~!YB&@@
+echo @@@@@#57~~~~~~~~~~~~~~?P&@@@@&
+echo 7JG&@@@@G?~~~~~~~~~!JB@@@@#P?7
+echo !~~!?G&@@@G7~~~~~~J#@@@#P?~~~?
+echo 5~~~~~!5@@@@P!~~7B@@@#J!~~~~~G
+echo &7~~~~~~#@@@@#?Y&@@@@P~~~~~~J@
+echo @#!~~~~!#@@@@@@@@@@@@P~~~~~?&@
+echo @@#7~~~!#@@BB@@@@P#@@P~~~~?&@@
+echo @@@&Y~~!#@@G~Y@#?~B@@P~~!5@@@@
+echo @@@@@B?~#@@&!~7!~7&@@P~J#@@@@@
+echo @@@@@@@B&@@@5~~~~P@@@##@@@@@@@
+echo @@@@@@@@@@@@@?~~Y@@@@@@@@@@@@@
+echo @@@@@@@@@@@@@&7Y@@@@@@@@@@@@@@
 
 timeout /t 3 /nobreak > NUL
 
@@ -64,10 +60,10 @@ timeout /t 1 /nobreak > NUL
 
 :: --- Packages DelusionOS ---
 & echo. & echo  !S_GRAY!Install Visual AIO Libraries..
-"%windir%"\APIs\Visual AIO.exe /aiA /gm2 > NUL 2>&1 
+"%windir%"\DelusionOS Setup\Visual AIO.exe /aiA /gm2 > NUL 2>&1 
 
-& echo. & echo  !S_GRAY!Install DirectX...
-"%windir%"\APIs\DirectX.exe /silent > NUL 2>&1 
+echo  Install DirectX...
+"%windir%"\DelusionOS Setup\DirectX.exe /silent > NUL 2>&1 
 
 :: --- MOUSE TWEAKS ---
 echo Configuring Mouse...
@@ -3401,13 +3397,6 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\WmiPrvSE.exe" /v "UseLargePages" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\WmiPrvSE.exe" /v "AuditLevel" /t REG_DWORD /d "0" /f >nul
 
-
-& echo. & echo  !S_GRAY!Fix Start menu on first reboot
-cmd /c "start C:\Windows\explorer.exe"
-taskkill /f /im explorer.exe >nul
-taskkill /f /im explorer.exe >nul
-cmd /c "start C:\Windows\explorer.exe"
-
 & echo. & echo  !S_GRAY!fixing languages if needed
 REG ADD "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "DoNotConnectToWindowsUpdateInternetLocations" /t REG_DWORD /d "0" /f >nul
 REG ADD "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "UseWUServer" /t REG_DWORD /d "0" /f >nul
@@ -3449,7 +3438,7 @@ powercfg -import "%windir%\deluos.pow" 00000000-16f6-45a6-9fcf-0fa130b83c00 >nul
 powercfg -setactive 00000000-16f6-45a6-9fcf-0fa130b83c00 >nul
 powercfg -delete 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >nul
 powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >nul
-for %l in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~l/Diagnostic /e:false)
+for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~l/Diagnostic /e:false)
 
 & echo. & echo  !S_GRAY!Configuration Device manager...
 devmanview.exe /disable "PCI Data Acquisition and Signal Processing Controller"
@@ -3459,7 +3448,6 @@ devmanview.exe /disable "PCI Memory Controller"
 devmanview.exe /disable "PCI standard RAM Controller"
 devmanview.exe /disable "AURA LED Controller"
 devmanview.exe /disable "Intel SMBus"
-devmanview.exe /disable "AMD PSP"
 devmanview.exe /disable "AMD SMBus"
 devmanview.exe /disable "Micosoft GS Wavetable Synth"
 devmanview.exe /disable "Microsoft Hyper-V Virtualization Infrastructure Driver"
