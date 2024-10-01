@@ -9,8 +9,7 @@ for /f "delims=" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services"') d
                 echo. >>%BACKUP%
                 echo [%%~a] >>%BACKUP%
                 echo "Start"=dword:0000000%%c >>%BACKUP%
-            ) 
-        ) 
-    ) 
-) >nul 2>&1
-cls
+            )
+        )
+    )
+)
