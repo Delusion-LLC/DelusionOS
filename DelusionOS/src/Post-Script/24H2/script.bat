@@ -1,5 +1,16 @@
 @echo off && SETLOCAL EnableDelayedExpansion && title POST-INSTALL && mode con: cols=99 lines="20"
-:: version 0.9 dev
+:: version 1.0 release 24H2
+:: license GPL-3.0
+
+:: Hello,
+:: Before I start, I would like to thank the following peoplers who helped me develop this project.
+:: Sharing your experiences and results github, twitter, discord
+:: clqwnless
+:: couwthynokap
+:: HickerDicker
+:: imribiy
+:: ChrisTitusTech
+:: AMITXV
 
 call :Colors
 
@@ -35,24 +46,10 @@ timeout /t 3 /nobreak > NUL
 & echo. & echo  !S_GRAY!Execution Policy To Unrestricted...
 C:\Users\Default\Desktop\Post-Install\Tweaks\NSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell set-executionpolicy unrestricted -force" >nul
 
-:: Hello,
-:: Before I start, I would like to thank the following peoplers who helped me develop this project.
-:: Sharing your experiences and results github, twitter, discord
-:: clqwnless
-:: couwthynokap
-:: HickerDicker
-:: imribiy
-:: ChrisTitusTech
-:: AMITXV
-
 :: Disabling task manager to prevent random access
 Reg.exe add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\taskmgr.exe" /v "Debugger" /t REG_SZ /d "." /f >nul
 
 & echo. & echo  !S_GRAY!Configuration for start...
-slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
-slmgr /skms kms8.msguides.com
-slmgr /ato
-powershell -ExecutionPolicy Bypass -File "C:\Windows\modules\appx.ps1"
 net accounts /maxpwage:unlimited >nul
 call "C:\Windows\APIs\packages-deluos\smartscreen_mgmt.bat" >nul
 Reg.exe add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "C:\Windows\SYSTEM32\deluos.jpg" /f >nul
@@ -60,10 +57,10 @@ timeout /t 1 /nobreak > NUL
 
 :: --- Packages DelusionOS ---
 & echo. & echo  !S_GRAY!Install Visual AIO Libraries..
-"%windir%"\DelusionOS Setup\Visual AIO.exe /aiA /gm2 > NUL 2>&1 
+"%windir%"\Visual AIO.exe /aiA /gm2 > NUL 2>&1
 
-echo  Install DirectX...
-"%windir%"\DelusionOS Setup\DirectX.exe /silent > NUL 2>&1 
+echo Install DirectX...
+"%windir%"\dxwebsetup.exe /silent > NUL 2>&1
 
 :: --- MOUSE TWEAKS ---
 echo Configuring Mouse...
@@ -77,7 +74,7 @@ FOR /F %%m in ('WMIC PATH Win32_USBHub GET DeviceID^| FINDSTR /L "VID_"') DO (
 	REG ADD "HKLM\SYSTEM\CurrentControlSet\Enum\%%r\Device Parameters" /F /V "SelectiveSuspendOn" /T REG_DWORD /d "0" >nul
 	REG ADD "HKLM\SYSTEM\CurrentControlSet\Enum\%%r\Device Parameters" /F /V "DeviceSelectiveSuspended" /T REG_DWORD /d "0" >nul
 	REG ADD "HKLM\SYSTEM\CurrentControlSet\Enum\%%r\Device Parameters" /F /V "SelectiveSuspendEnabled" /T REG_DWORD /d "0" >nul
-    REG ADD "HKLM\SYSTEM\CurrentControlSet\Enum\%%r\Device Parameters" /F /V "IdleInWorkingState" /T REG_DWORD /d "0" >nul
+        REG ADD "HKLM\SYSTEM\CurrentControlSet\Enum\%%r\Device Parameters" /F /V "IdleInWorkingState" /T REG_DWORD /d "0" >nul
 	ECHO Disabling USB idling for %%m
 )
 for %%r in (
@@ -185,11 +182,11 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\ALG" /v "Start" /t REG_DWORD /d 
 reg add "HKLM\SYSTEM\CurrentControlSet\services\AJRouter" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\StiSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\RDPDR" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\WinHttpAutoProxySvc" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\SmsRouter" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\W32Time" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\HvHost" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\bttflt" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\services\sedsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\services\HvHost" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\wudfsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\vmicguestinterface" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\vmicheartbeat" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -199,7 +196,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\vmicshutdown" /v "Start" /t REG_
 reg add "HKLM\SYSTEM\CurrentControlSet\services\vmictimesync" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\vmicvmsession" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\vmicvss" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\services\bttflt" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\gencounter" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\hvservice" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\hyperkbd" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -216,7 +212,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\FontCache" /v "Start" /t REG_DWO
 reg add "HKLM\SYSTEM\CurrentControlSet\services\FontCache3.0.0.0" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\DPS" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\wlidsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\services\cnghwassitst" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\cdfs" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\cdrom" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\Telemetry" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -237,7 +232,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\scpolicysvc" /v "Start" /t REG_D
 reg add "HKLM\SYSTEM\CurrentControlSet\services\diagsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\AppReadiness" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\bam" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\services\dam" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\NetTcpPortSharing" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\SEMgrSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\UCPD" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -253,13 +247,18 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\BFE" /v "Start" /t REG_DWORD /d 
 reg add "HKLM\SYSTEM\CurrentControlSet\services\EFS" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\dmwappushservice" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\Beep" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg delete "HKLM\SYSTEM\CurrentControlSet\services\P9RdrService" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\SstpSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\PimIndexMaintenanceSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
+sc delete WarpJITSvc >nul
+sc delete P9RdrService >nul
+sc delete PenService >nul
+sc delete ssh-agent >nul
+sc stop sedsvc & sc delete sedsvc & rd /q /s "%programfiles%\rempl" >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\ShellHWDetection" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg delete "HKLM\SYSTEM\CurrentControlSet\services\PenService" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\GraphicsPerfSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\GpuEnergyDrv" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\TermService" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\NcbService" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\services\OneSyncSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\PcaSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\printworkflowusersvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\UevAgentService" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -275,13 +274,13 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\TrkWks" /v "Start" /t REG_DWORD 
 reg add "HKLM\SYSTEM\CurrentControlSet\services\tzautoupdate" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\WerSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\WSearch" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\CompositeBus" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\wuauserv" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\wisvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\wscsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\Vid" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\RemoteAccess" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\RemoteRegistry" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg delete "HKLM\SYSTEM\CurrentControlSet\services\ssh-agent" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\p2pimsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\p2psvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\AxInstSV" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -294,6 +293,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\QWAVE" /v "Start" /t REG_DWORD /
 reg add "HKLM\SYSTEM\CurrentControlSet\services\QWAVEdrv" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\BITS" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\DmEnrollmentSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\SharedAccess" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\Wecsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\UsoSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\IKEEXT" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -302,7 +302,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\AssignedAccessManagerSvc" /v "St
 reg add "HKLM\SYSTEM\CurrentControlSet\services\shpamsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\uhssvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\WmanSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\services\AppXSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\StorSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\XblAuthManager" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\GameInputSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -311,6 +310,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\xboxgip" /v "Start" /t REG_DWORD
 reg add "HKLM\SYSTEM\CurrentControlSet\services\XboxGipSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\XboxNetApiSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\xinputhid" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\bowser" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\dosvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\OneSyncSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\SstpSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -321,18 +321,12 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\acpitime" /v "Start" /t REG_DWOR
 reg add "HKLM\SYSTEM\CurrentControlSet\services\iphlpsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\Themes" /v "Start" /t REG_DWORD /d "4" / >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\WSearch" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HLKM\SYSTEM\CurrentControlSet\services\WindowsTrustedRT" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HLKM\SYSTEM\CurrentControlSet\services\WindowsTrustedRTProxy" /v "Start" /t REG_DWORD /d "4" /f >nul
 
 :: --- TWEAKS REGEDIT/GPEDIT ---
 & echo. & echo  !S_GRAY!Configuring tweaks regedit...
 @REM Creator couwthynokap
-Reg.exe add "HKLM:\Software\Microsoft\PolicyManager\default\WiFi" /v "AllowWiFiHotSpotReporting" /t REG_DWORD /d "0" /f >nul
-Reg.exe add "HKLM:\Software\Microsoft\PolicyManager\default\WiFi" /v "AllowAutoConnectToWiFiSenseHotspots" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "CEIPEnable" /t REG_DWORD /d "0" /f >nul
-Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoDriveTypeAutoRun" /t REG_DWORD /d "255" /f >nul
-Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "DisableCloudContent" /t REG_DWORD /d "1" /f >nul
-Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "DisableAccountManager" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "MDMEnrollment" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f >nul
@@ -3406,9 +3400,9 @@ fsutil behavior set disablelastaccess 1 >nul
 fsutil behavior set disabledeletenotify 0 >nul
 fsutil behavior set encryptpagingfile 0 >nul
 fsutil behavior set memoryusage 2 >nul
-@REM DISM /Online /Remove-Capability /CapabilityName:Recall~~~~0.0.1.0 /NoRestart /Quiet
-DISM /Online /Remove-Capability /CapabilityName:MathRecognizer0.0.1.0 /norestart /quiet
-DISM /Online /Remove-Capability /CapabilityName:Microsoft.Windows.PowerShell.ISE0.0.1.0 /norestart /quiet
+DISM /Online /Remove-Capability /CapabilityName:MicrosoftWindows.Client.AIX /NoRestart /Quiet
+DISM /Online /Remove-Capability /CapabilityName:MathRecognizer /norestart /quiet
+DISM /Online /Remove-Capability /CapabilityName:Microsoft.Windows.PowerShell.ISE /norestart /quiet
 
 & echo. & echo  !S_GRAY!Configuring boot windows...
 bcdedit /set noumex Yes >nul
