@@ -1,4 +1,7 @@
-@echo off && SETLOCAL EnableDelayedExpansion && title POST-INSTALL && mode con: cols=99 lines="20"
+@echo off
+SETLOCAL EnableDelayedExpansion
+title POST-INSTALL
+
 :: version 1.0 release 24H2
 :: license GPL-3.0
 
@@ -13,8 +16,6 @@
 :: AMITXV
 
 call :Colors
-
-taskkill /f /im explorer.exe > NUl 2>&1 & timeout /t 2 /nobreak >NUL 2&1 & start explorer.exe > NUL 2&1
 
 echo. & echo. & echo.
 
@@ -43,28 +44,26 @@ echo @@@@@@@@@@@@@&7Y@@@@@@@@@@@@@@
 
 timeout /t 3 /nobreak > NUL
 
-& echo. & echo  !S_GRAY!Execution Policy To Unrestricted...
-C:\Users\Default\Desktop\Post-Install\Tweaks\NSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell set-executionpolicy unrestricted -force" >nul
+echo  !S_GRAY!Execution Policy To Unrestricted...
+C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell set-executionpolicy unrestricted -force"
 
 :: Disabling task manager to prevent random access
 Reg.exe add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\taskmgr.exe" /v "Debugger" /t REG_SZ /d "." /f >nul
 
-& echo. & echo  !S_GRAY!Configuration for start...
+echo  !S_GRAY!Configuration for start...
 net accounts /maxpwage:unlimited >nul
-call "C:\Windows\APIs\packages-deluos\smartscreen_mgmt.bat" >nul
-Reg.exe add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "C:\Windows\SYSTEM32\deluos.jpg" /f >nul
+Reg.exe add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "C:\%windir%\deluos.jpg" /f >nul
 timeout /t 1 /nobreak > NUL
 
 :: --- Packages DelusionOS ---
-& echo. & echo  !S_GRAY!Install Visual AIO Libraries..
+echo  !S_GRAY!Install Visual AIO Libraries..
 "%windir%"\Visual AIO.exe /aiA /gm2 > NUL 2>&1
 
 echo Install DirectX...
 "%windir%"\dxwebsetup.exe /silent > NUL 2>&1
 
 :: --- MOUSE TWEAKS ---
-echo Configuring Mouse...
-@echo off
+echo  !S_YELLOW!Configuring Mouse...
 @REM Made by Couwthy
 
 :: disable usb idling
@@ -160,9 +159,8 @@ for %%p in ("InstallService\ScanForUpdates" "InstallService\ScanForUpdatesAsUser
 schtasks /delete /tn "\Microsoft\Windows\Application Experience\AitAgent" /f
 powershell -Command "Disable-ScheduledTask -TaskPath '\\Microsoft\\Windows\\AppxDeploymentClient' -TaskName 'UCPD velocity'"
 
-
 :: --- SERVICES ---
-& echo. & echo  !S_GRAY!Configuring Services...
+echo  !S_GRAY!Configuring Services...
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Perflib" /v "Disable Perfomance Counters" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dhcp" /v "DependOnService" /t REG_MULTI_SZ /d "NSI\0Afd" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache" /v "DependOnService" /t REG_MULTI_SZ /d "nsi" /f >nul
@@ -324,7 +322,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\WSearch" /v "Start" /t REG_DWORD
 reg add "HLKM\SYSTEM\CurrentControlSet\services\WindowsTrustedRTProxy" /v "Start" /t REG_DWORD /d "4" /f >nul
 
 :: --- TWEAKS REGEDIT/GPEDIT ---
-& echo. & echo  !S_GRAY!Configuring tweaks regedit...
+echo  !S_GRAY!Configuring tweaks regedit...
 @REM Creator couwthynokap
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "CEIPEnable" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "MDMEnrollment" /t REG_DWORD /d "0" /f >nul
@@ -3391,20 +3389,34 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execut
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\WmiPrvSE.exe" /v "UseLargePages" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\WmiPrvSE.exe" /v "AuditLevel" /t REG_DWORD /d "0" /f >nul
 
-& echo. & echo  !S_GRAY!fixing languages if needed
+echo  !S_GRAY!fixing languages if needed
 REG ADD "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "DoNotConnectToWindowsUpdateInternetLocations" /t REG_DWORD /d "0" /f >nul
 REG ADD "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "UseWUServer" /t REG_DWORD /d "0" /f >nul
+
+echo  !S_GRAY!Enabling MSI mode & set to undefined
+for /f %%c in ('wmic path Win32_USBController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f
+for /f %%c in ('wmic path Win32_USBController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg delete "HKLM\SYSTEM\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f >nul 2>nul
+:: Probably will be reset by installing GPU driver
+for /f %%c in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f
+for /f %%c in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f >nul 2>nul
+for /f %%c in ('wmic path Win32_NetworkAdapter get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f
+for /f %%c in ('wmic path Win32_IDEController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f
+for /f %%c in ('wmic path Win32_IDEController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f >nul 2>nul
+for /f %%c in ('wmic path Win32_NetworkAdapter get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f >nul 2>nul
+:: Fix VMware
+wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare && (
+    for /f %%a in ('wmic path Win32_NetworkAdapter get PNPDeviceID ^| findstr /l "PCI\VEN_"') do (
+        reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /t REG_DWORD /d "2"  /f > nul 2>nul
+    )
+)
+cls
 
 fsutil behavior set disable8dot3 1 >nul
 fsutil behavior set disablelastaccess 1 >nul
 fsutil behavior set disabledeletenotify 0 >nul
-fsutil behavior set encryptpagingfile 0 >nul
 fsutil behavior set memoryusage 2 >nul
-DISM /Online /Remove-Capability /CapabilityName:MicrosoftWindows.Client.AIX /NoRestart /Quiet
-DISM /Online /Remove-Capability /CapabilityName:MathRecognizer /norestart /quiet
-DISM /Online /Remove-Capability /CapabilityName:Microsoft.Windows.PowerShell.ISE /norestart /quiet
 
-& echo. & echo  !S_GRAY!Configuring boot windows...
+echo  !S_GRAY!Configuring boot windows...
 bcdedit /set noumex Yes >nul
 bcdedit /set bootems No >nul
 bcdedit /set ems No >nul
@@ -3423,18 +3435,15 @@ bcdedit /set halbreakpoint No >nul
 bcdedit /set bootmenupolicy legacy >nul
 bcdedit /set tscsyncpolicy Enhanced >nul
 bcdedit /set uselegacyapicmode No >nul
-bcdedit /set loadoptions DISABLE-LSA-ISO,DISABLE-VBS >nul
 bcdedit /set {current} description "DelusionOS 24H2" >nul
 label C: DelusionOS W11 24H2 >nul
 
-& echo. & echo  !S_GRAY!Importing Power Plan...
 powercfg -import "%windir%\deluos.pow" 00000000-16f6-45a6-9fcf-0fa130b83c00 >nul
 powercfg -setactive 00000000-16f6-45a6-9fcf-0fa130b83c00 >nul
-powercfg -delete 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >nul
 powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >nul
 for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~l/Diagnostic /e:false)
 
-& echo. & echo  !S_GRAY!Configuration Device manager...
+echo Configuration Device manager...
 devmanview.exe /disable "PCI Data Acquisition and Signal Processing Controller"
 devmanview.exe /disable "PCI Encryption/Decryption Controller"
 devmanview.exe /disable "PCI Simple Communications Controller"
@@ -3461,9 +3470,6 @@ devmanview.exe /disable "Microsoft Device Association Root Enumerator"
 devmanview.exe /disable "Composite Bus Enumerator"
 devmanview.exe /disable "NDIS Virtual Network Adapter Enumerator"
 devmanview.exe /disable "UMBus Root Bus Enumerator"
-
-& echo. & echo  !S_GRAY!"Removing leftover devices"
-C:\Windows\modules\DeviceCleanupCmd.exe * -s >nul 2>&1
 
 setx DOTNET_CLI_TELEMETRY_OPTOUT 1 & setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul
 for %%k in (
@@ -3505,7 +3511,7 @@ if "%DEVICE_TYPE%" == "LAPTOP" (
     Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wmiacpi" /v "Start" /t REG_DWORD /d "4" /f >nul 2>&1
 )
 
-& echo. & echo  !S_GRAY!Configuration Latency Tolerance...
+echo  !S_WHITE!Configuration Latency Tolerance...
 @rem Creator couwthynokap
 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl" /v "MonitorLatencyTolerance" /t REG_DWORD /d "1" /f >nul
@@ -3564,7 +3570,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "vrrDeflickerMaxUs" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "RMHdcpKeyglobZero" /t REG_DWORD /d "1" /f >nul
 
-& echo. & echo  !S_GRAY!Configuration Internet Tweaks....
+echo  !S_GRAY!Configuration Internet Tweaks....
 @rem Creator couwthynokap
 netsh winsock set autotuning on >nul
 netsh interface tcp set global hystart=disabled >nul
@@ -3654,35 +3660,30 @@ powershell Set-NetAdapterAdvancedProperty -AllProperties -Name "*" -RegistryKeyw
 powershell Set-NetAdapterAdvancedProperty -AllProperties -Name "*" -RegistryKeyword "EnableLLI" -RegistryValue "1" >nul
 powershell Set-NetAdapterAdvancedProperty -AllProperties -Name "*" -RegistryKeyword "*SSIdleTimeout" -RegistryValue "60" >nul
 
-& echo. & echo  !S_GRAY!Storage Tweaks...
-	:: Disable HIPM and DIPM, HDD Parking
-	FOR /F "eol=E" %%z in ('REG QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F "EnableHIPM"^| FINDSTR /V "EnableHIPM"') DO (
-		Reg.exe add "%%z" /F /V "EnableHIPM" /T REG_DWORD /d 0 /f
-		Reg.exe add "%%z" /F /V "EnableDIPM" /T REG_DWORD /d 0 /f
-		Reg.exe add "%%z" /F /V "EnableHDDParking" /T REG_DWORD /d 0 /f
+echo  !S_GRAY!Disabling DMA Remapping
+for %%d in (DmaRemappingCompatible) do for /f "delims=" %%d in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s /f "%%d" ^| findstr "HKEY"') do Reg.exe add "%%d" /v "%%d" /t REG_DWORD /d "0" /f >nul 2>&1
+cls
 
-		FOR /F "tokens=*" %%z IN ("%%z") DO (
-			SET STR=%%z
-			SET STR=!STR:HKLM\SYSTEM\CurrentControlSet\Services\=!
-		)
-	)
-)
+echo  !S_GRAY!Storage Tweaks apply..
+for %%z in (EnableHIPM EnableDIPM EnableHDDParking) do for /f "delims=" %%z in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s /f "%%z" ^| findstr "HKEY"') do Reg.exe add "%%z" /v "%%z" /t REG_DWORD /d "0" /f >nul 2>&1
+cls
 
-& echo. & echo  !S_GRAY!Disabling NetBIOS over TCP/UPD...
+echo  !S_GRAY!Disabling NetBIOS over TCP/UPD...
     for /f "delims=" %%u in ('reg query "HKLM\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces" /s /f "NetbiosOptions" ^| findstr "HKEY"') do (
         Reg.exe add "%%u" /v "NetbiosOptions" /t REG_DWORD /d "2" /f
     )
 
-& echo. & echo  !S_GRAY!Disabling Exclusive Mode On Audio Devices...
+echo  !S_GRAY!Disabling Exclusive Mode On Audio Devices...
 for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},3" /t REG_DWORD /d "0" /f >nul
 for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},4" /t REG_DWORD /d "0" /f >nul
 for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},3" /t REG_DWORD /d "0" /f >nul
 for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},4" /t REG_DWORD /d "0" /f >nul
 
-Reg.exe delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\taskmgr.exe" /f >nul
+shutdown -r -t 10
+msg * your pc will restart in 10 seconds from now you can run shutdown -a to cancel it if you have to install any drivers or want to set up your pc BUT DO NOT FORGET TO RESTART
 
-echo 20 sec wait
-shutdown.exe -r -t 20
+:: Restore task manager to prevent random access
+Reg.exe delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\taskmgr.exe" /f >nul
 
 :Colors
 set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
