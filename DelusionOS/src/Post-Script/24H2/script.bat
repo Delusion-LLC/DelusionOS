@@ -2,7 +2,7 @@
 SETLOCAL EnableDelayedExpansion
 title POST-INSTALL
 
-:: version 1.0 release 24H2
+:: version 1.0 non-release 24H2 (8 october to release)
 :: license GPL-3.0
 
 :: Hello,
@@ -18,31 +18,6 @@ title POST-INSTALL
 :: Spddl / https://github.com/spddl
 
 call :Colors
-
-echo. & echo. & echo.
-
-echo @@@@@@@@@@@@@@J5@@@@@@@@@@@@@@ 
-echo @@@@@@@@@@@@@Y~~P@@@@@@@@@@@@@
-echo @@@@@@@@@@@@Y~~~~5@@@@@@@@@@@@
-echo @@@@@@@@@@#?~~~~~~?#@@@@@@@@@@
-echo @@@@@@@@&5!~~~~~~~~!G@@@@@@@@@
-echo @@@@@@&P7~~~~~~~~~~~~?G@@@@@@@
-echo @@@@&P7~~~~~~~~~~~~~~~~?G&@@@@
-echo @#PJ!~~~~~~~~~~~~~~~~~~~~!YG&@
-echo BJ~~~~~~~~~~~~~~~~~~~~~~~~~!Y#
-echo @@&GJ!~~~~~~~~~~~~~~~~~~!YB&@@
-echo @@@@@#57~~~~~~~~~~~~~~?P&@@@@&
-echo 7JG&@@@@G?~~~~~~~~~!JB@@@@#P?7
-echo !~~!?G&@@@G7~~~~~~J#@@@#P?~~~?
-echo 5~~~~~!5@@@@P!~~7B@@@#J!~~~~~G
-echo &7~~~~~~#@@@@#?Y&@@@@P~~~~~~J@
-echo @#!~~~~!#@@@@@@@@@@@@P~~~~~?&@
-echo @@#7~~~!#@@BB@@@@P#@@P~~~~?&@@
-echo @@@&Y~~!#@@G~Y@#?~B@@P~~!5@@@@
-echo @@@@@B?~#@@&!~7!~7&@@P~J#@@@@@
-echo @@@@@@@B&@@@5~~~~P@@@##@@@@@@@
-echo @@@@@@@@@@@@@?~~Y@@@@@@@@@@@@@
-echo @@@@@@@@@@@@@&7Y@@@@@@@@@@@@@@
 
 timeout /t 3 /nobreak > NUL
 
@@ -249,11 +224,12 @@ reg add "HKLM\SYSTEM\CurrentControlSet\services\dmwappushservice" /v "Start" /t 
 reg add "HKLM\SYSTEM\CurrentControlSet\services\Beep" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\SstpSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\PimIndexMaintenanceSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
-sc delete WarpJITSvc >nul
-sc delete P9RdrService >nul
-sc delete PenService >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\WarpJITSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\P9RdrService" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\PenService" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\services\OSRSS" /v "Start" /t REG_DWORD /d "4" /f
 sc delete ssh-agent >nul
-sc stop sedsvc & sc delete sedsvc & rd /q /s "%programfiles%\rempl" >nul
+sc stop sedsvc & sc delete sedsvc >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\ShellHWDetection" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\GraphicsPerfSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\GpuEnergyDrv" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -326,6 +302,8 @@ reg add "HLKM\SYSTEM\CurrentControlSet\services\WindowsTrustedRTProxy" /v "Start
 :: --- TWEAKS REGEDIT/GPEDIT ---
 echo  !S_GRAY!Configuring tweaks regedit...
 @REM Creator couwthynokap
+reg add "HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Permissions\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v "SensorPermissionState" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v "SensorPermissionState" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "CEIPEnable" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "MDMEnrollment" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d "0" /f >nul
@@ -333,8 +311,9 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaC
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "InkAndTypingPersonalizationEnabled" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /v "FaultTolerantHeap" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "NotifyUserOnOutOfSupport" /t REG_DWORD /d "0" /f >nul
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "222222222222222" /f >nul
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "222222222222222" /f >nul
+:: back to release.. (Mitigation.. setting for 24H2 pre-release is BSOD)
+:: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "222222222222222" /f >nul
+:: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "222222222222222" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Manufacturer" /t REG_SZ /d "DelusionOS 11" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model" /t REG_SZ /d "DelusionOS 24H2" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "https://dsc.gg/delusionos/" /f >nul
