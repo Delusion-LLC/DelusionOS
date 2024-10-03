@@ -22,8 +22,7 @@ timeout /t 3 /nobreak > NUL
 echo  !S_GRAY!Execution Policy To Unrestricted...
 C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell set-executionpolicy unrestricted -force"
 
-:: Disabling task manager to prevent random access
-Reg.exe add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\taskmgr.exe" /v "Debugger" /t REG_SZ /d "." /f >nul
+setx DOTNET_CLI_TELEMETRY_OPTOUT 1 & setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul
 
 echo  !S_GRAY!Configuration for start...
 net accounts /maxpwage:unlimited >nul
@@ -83,7 +82,7 @@ DISM >nul 2>&1 || (
 )
 
 :: start tweaking for Mouse
-bcdedit /set disabledynamictick >nul
+bcdedit /set disabledynamictick Yes >nul
 bcdedit /deletevalue useplatformclock >nul
 bcdedit /deletevalue useplatformtick >nul
 
@@ -92,15 +91,9 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Input" /v "InputServiceEnabled" /t REG_DWOR
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Input" /v "InputServiceEnabledForCCI" /t REG_DWORD /d "0" /f >nul
 
 :: disable mouse accel
-reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f >nul
-reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f >nul
-reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f >nul
-
-:: mouse fix
-reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseSensitivity" /t REG_SZ /d "10" /f >nul
-reg add "HKEY_USERS\.DEFAULT\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f >nul
-reg add "HKEY_USERS\.DEFAULT\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f >nul
-reg add "HKEY_USERS\.DEFAULT\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f >nul
+reg add "HKCU\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f >nul
+reg add "HKCU\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f >nul
+reg add "HKCU\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f >nul
 
 :: --- SCHEDULED TASKS ---
 echo Configuring Scheduled Tasks...
@@ -3396,24 +3389,16 @@ fsutil behavior set disabledeletenotify 0 >nul
 fsutil behavior set memoryusage 2 >nul
 
 echo  !S_GRAY!Configuring boot windows...
-bcdedit /set noumex Yes >nul
-bcdedit /set bootems No >nul
-bcdedit /set ems No >nul
-bcdedit /set bootlog No >nul
 bcdedit /set hypervisorlaunchtype No >nul
 bcdedit /set isolatedcontext No >nul
 bcdedit /set vsmlaunchtype Off >nul
 bcdedit /set vm No >nul
 bcdedit /set quietboot Yes >nul
 bcdedit /set integrityservices disable >nul
-bcdedit /set nx optin >nul
-bcdedit /set pae ForceDisable >nul
-bcdedit /set x2apicpolicy Enable >nul
+bcdedit /set nx AlwaysOff >nul
 bcdedit /set bootux Disabled >nul
 bcdedit /set halbreakpoint No >nul
 bcdedit /set bootmenupolicy legacy >nul
-bcdedit /set tscsyncpolicy Enhanced >nul
-bcdedit /set uselegacyapicmode No >nul
 bcdedit /set {current} description "DelusionOS 24H2" >nul
 label C: DelusionOS W11 24H2 >nul
 
@@ -3451,25 +3436,6 @@ devmanview.exe /disable "Composite Bus Enumerator"
 devmanview.exe /disable "NDIS Virtual Network Adapter Enumerator"
 devmanview.exe /disable "UMBus Root Bus Enumerator"
 
-setx DOTNET_CLI_TELEMETRY_OPTOUT 1 & setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul
-for %%k in (
-	EnhancedPowerManagementEnabled
-	AllowIdleIrpInD3
-	EnableSelectiveSuspend
-	DeviceSelectiveSuspended
-	SelectiveSuspendEnabled
-	SelectiveSuspendOn
-	EnumerationRetryCount
-	ExtPropDescSemaphore
-	WaitWakeEnabled
-	D3ColdSupported
-	WdfDirectedPowerTransitionEnable
-	EnableIdlePowerManagement
-	IdleInWorkingState
-	fid_D1Latency
-	fid_D2Latency
-	fid_D3Latency
-) do for /f "delims=" %%l in ('reg query "HKLM\SYSTEM\CurrentControlSet\Enum" /s /f "%%l" ^| findstr "HKEY"') do PowerRun.exe /SW:0 "reg.exe" add "%%l" /v "%%l" /t REG_DWORD /d "0" /f >nul
 Powershell -NonInteractive -NoLogo -NoProfile -Command "Disable-MMAgent -mc | Disable-WindowsErrorReporting | Disable-MMAgent -PageCombining | Disable-MMAgent -ApplicationPreLaunch"
 Powershell "Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.enable = $false; $_.psbase.put(); }"
 
@@ -3531,11 +3497,11 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power" /v "Mo
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power" /v "TransitionLatency" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "D3PCLatency" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "F1TransitionLatency" /t REG_DWORD /d "1" /f >nul
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "LOWLATENCY" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "Node3DLowLatency" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PciLatencyTimerControl" /t REG_DWORD /d "20" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "RMDeepL1EntryLatencyUsec" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "RmGspcMaxFtuS" /t REG_DWORD /d "1" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisablePreemption" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "RmGspcMinFtuS" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "RmGspcPerioduS" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "RMLpwrEiIdleThresholdUs" /t REG_DWORD /d "1" /f >nul
@@ -3580,10 +3546,6 @@ netsh int ip set interface %INTERFACE% basereachable=3600000 dadtransmits=0 othe
 netsh int tcp set global rss=enabled >nul
 netsh int tcp set global rsc=disabled >nul
 netsh int tcp set global initialRto=2000 >nul
-netsh int tcp set heuristics disabled >nul
-netsh interface tcp set heuristics disabled >nul
-netsh interface tcp set heuristics forcews=disabled >nul
-netsh int tcp set heuristics wsh=disabled >nul
 netsh int tcp set security mpp=disabled >nul
 netsh int tcp set security profiles=disabled >nul
 netsh int tcp set global ecncapability=disabled >nul
@@ -3660,10 +3622,6 @@ for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersi
 for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},4" /t REG_DWORD /d "0" /f >nul
 
 shutdown -r -t 10
-msg * your pc will restart in 10 seconds from now you can run shutdown -a to cancel it if you have to install any drivers or want to set up your pc BUT DO NOT FORGET TO RESTART
-
-:: Restore task manager to prevent random access
-Reg.exe delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\taskmgr.exe" /f >nul
 
 :Colors
 set "CMDLINE=RED=[31m,S_GRAY=[90m,S_RED=[91m,S_GREEN=[92m,S_YELLOW=[93m,S_MAGENTA=[95m,S_WHITE=[97m,B_BLACK=[40m,B_YELLOW=[43m,UNDERLINE=[4m,_UNDERLINE=[24m"
