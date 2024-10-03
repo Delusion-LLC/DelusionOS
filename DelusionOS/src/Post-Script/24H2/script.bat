@@ -97,18 +97,6 @@ reg add "HKCU\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f >nul
 
 :: --- SCHEDULED TASKS ---
 echo Configuring Scheduled Tasks...
-powershell disable-netadapterbinding -Name "*" -componentid "vmware_brige, ms_lldp, ms_lltdio, ms_implat, ms_tcpip6, ms_rspndr, ms_server, ms_msclient"
-
-setlocal
-
-set autologgers=autologger-diagtrack-listener,cellcore,cloudexperiencehostoobe,lwtnetlog,melanos-Kernel,microsoft-windows-assignedacces-trace,microsoft-windows-rdp-graphics-rdpidd-trace,microsoft-windows-setup,netcore,ntfslog,peauthlog,radiomgr,readyboot,refslog,setupplatform,setupplatformtel,spoolerlogger,tcpiplogger,wifisession,wifidriverhvsessionrepro,wifidriverihvsession,wfp-ipsec-trace,ubpm,tilestore
-
-for %%Q in (%autologgers%) do (
-    powershell -Command "Remove-AutologgerConfig -Name %%~Q"
-)
-
-endlocal
-
 reg delete "HKLM\System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /f && reg add "HKLM\System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /f >nul 2>&1
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Tpm" /v "Start" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\WinPhoneCritical" /v "Start" /t REG_DWORD /d "0" /f >nul
@@ -224,7 +212,6 @@ sc stop sedsvc & sc delete sedsvc >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\ShellHWDetection" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\GraphicsPerfSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\GpuEnergyDrv" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\services\TermService" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\NcbService" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\PcaSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\printworkflowusersvc" /v "Start" /t REG_DWORD /d "4" /f >nul
