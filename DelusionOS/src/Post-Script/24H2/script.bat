@@ -120,7 +120,12 @@ powershell -Command "Disable-ScheduledTask -TaskPath '\\Microsoft\\Windows\\Appx
 
 :: --- SERVICES ---
 echo  !S_GRAY!Configuring Services...
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Perflib" /v "Disable Perfomance Counters" /t REG_DWORD /d "1" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}" /v "UpperFilters" /t REG_MULTI_SZ /d "" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{6bdd1fc6-810f-11d0-bec7-08002be2092f}" /v "UpperFilters" /t REG_MULTI_SZ /d "" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{ca3e7ab9-b4c3-4ae6-8251-579ef933890f}" /v "UpperFilters" /t REG_MULTI_SZ /d "" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e967-e325-11ce-bfc1-08002be10318}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "UpperFilters" /t REG_MULTI_SZ /d "" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dhcp" /v "DependOnService" /t REG_MULTI_SZ /d "NSI\0Afd" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache" /v "DependOnService" /t REG_MULTI_SZ /d "nsi" /f >nul
 
@@ -2198,17 +2203,17 @@ set "DEVICE_TYPE=PC"
 for %%j in (8 9 10 11 12 13 14 18 21 30 31 32) do if "%CHASSIS%" == "%%j" (set "DEVICE_TYPE=LAPTOP")
 
 if "%DEVICE_TYPE%" == "LAPTOP" (
-    Reg.exe add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\serenum" /v "Start" /t REG_DWORD /d "3" /f >nul
-    Reg.exe add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\sermouse" /v "Start" /t REG_DWORD /d "3" /f >nul
-    Reg.exe add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\serial" /v "Start" /t REG_DWORD /d "3" /f >nul
-    Reg.exe add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\wmiacpi" /v "Start" /t REG_DWORD /d "2" /f >nul
-    Reg.exe add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "0" /f >nul
+    Reg.exe add "HKLM\System\CurrentControlSet\Services\serenum" /v "Start" /t REG_DWORD /d "3" /f >nul
+    Reg.exe add "HKLM\System\CurrentControlSet\Services\sermouse" /v "Start" /t REG_DWORD /d "3" /f >nul
+    Reg.exe add "HKLM\System\CurrentControlSet\Services\serial" /v "Start" /t REG_DWORD /d "3" /f >nul
+    Reg.exe add "HKLM\System\CurrentControlSet\Services\wmiacpi" /v "Start" /t REG_DWORD /d "2" /f >nul
+    Reg.exe add "HKLM\System\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "0" /f >nul
     powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
 )
 ) else (
-    Reg.exe add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\DisplayEnhancementService" /v "Start" /t REG_DWORD /d "4" /f >nul
-    Reg.exe add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul
-    Reg.exe add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\wmiacpi" /v "Start" /t REG_DWORD /d "4" /f >nul
+    Reg.exe add "HKLM\System\CurrentControlSet\Services\DisplayEnhancementService" /v "Start" /t REG_DWORD /d "4" /f >nul
+    Reg.exe add "HKLM\System\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul
+    Reg.exe add "HKLM\System\CurrentControlSet\Services\wmiacpi" /v "Start" /t REG_DWORD /d "4" /f >nul
 )
 
 echo  !S_WHITE!Configuration Latency Tolerance...
