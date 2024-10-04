@@ -29,7 +29,8 @@ call :Colors
 timeout /t 3 /nobreak > NUL
 
 echo  !S_GRAY!Execution Policy To Unrestricted...
-C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell set-executionpolicy unrestricted -force"
+C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine -Force"
+C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force"
 
 setx DOTNET_CLI_TELEMETRY_OPTOUT 1 & setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul
 
