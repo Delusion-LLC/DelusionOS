@@ -12,7 +12,7 @@ DISM >nul || (
 :: version 1.0 non-release 24H2 (8 october to release)
 :: Delusion LLC
 :: working for script - hickerdicker, couwthynokap, clqwnless, e1uen
-:: license GPL-3.0
+:: license GNU-v3.0
 
 :: Hello,
 :: Before I start, I would like to thank the following peoplers who helped me develop this project.
