@@ -11,12 +11,14 @@ fltmc >nul 2>&1 || (
 :: Initialize environment
 setlocal EnableExtensions DisableDelayedExpansion
 
+sc config PrintNotify start=disabled
 sc config Spooler start=disabled
 sc config PrintWorkFlowUserSvc start=disabled
 sc config StiSvc start=disabled
 sc stop Spooler
 sc stop PrintWorkFlowUserSvc
 sc stop StiSvc
+sc stop PrintNotify
 powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\Printing\PrintJobCleanupTask" >nul 2>&1
 powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\Printing\PrinterCleanupTask" >nul 2>&1
 powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\Printing\EduPrintProv" >nul 2>&1
