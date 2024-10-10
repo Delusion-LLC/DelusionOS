@@ -33,6 +33,8 @@ timeout /t 3 /nobreak > NUL
 echo  !S_GRAY!Execution Policy To Unrestricted...
 C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine -Force"
 C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force"
+C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell Get-MMAgent"
+C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "PowerShell Disable-MMAgent -MemoryCompression -PageCombining -ApplicationPreLaunch"
 
 setx DOTNET_CLI_TELEMETRY_OPTOUT 1 & setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul
 
@@ -209,6 +211,9 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\Beep" /v "Start" /t REG_DWORD /d
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\SstpSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\PimIndexMaintenanceSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WarpJITSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\PrintNotify" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Spooler" /v "Start" /t REG_DWORD /d "4" /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\PrintWorkFlowUserSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\P9RdrService" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\PenService" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WalletService" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -306,6 +311,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Class\USB\0000" /v "IdleEnab
 Reg.exe add "HKCU\Control Panel\Keyboard" /v "InitialKeyboardIndicators" /t REG_SZ /d "2" /f >nul
 Reg.exe add "HKCU\Control Panel\Keyboard" /v "KeyboardDelay" /t REG_SZ /d "0" /f >nul
 Reg.exe add "HKCU\Control Panel\Keyboard" /v "KeyboardSpeed" /t REG_SZ /d "31" /f >nul
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\501a4d13-42af-4429-9fd1-a8218c268e20\ee12f906-d277-404b-b6da-e5fa1a576df5" /v "SettingValue" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\d4e98f31-5ffe-4ce1-be31-1b38b384c009" /v "SettingValue" /t REG_DWORD /d "0" /f >nul
@@ -2167,15 +2173,17 @@ devmanview.exe /disable "PCI standard RAM Controller"
 devmanview.exe /disable "AURA LED Controller"
 devmanview.exe /disable "Intel SMBus"
 devmanview.exe /disable "AMD SMBus"
+devmanview.exe /disable "Fax"
+devmanview.exe /disable "Microsoft Print to PDF"
+devmanview.exe /disable "Microsoft XPS Document Writer"
+devmanview.exe /disable "Root Print Queue"
 devmanview.exe /disable "Micosoft GS Wavetable Synth"
 devmanview.exe /disable "Microsoft Hyper-V Virtualization Infrastructure Driver"
 devmanview.exe /disable "Virtual Disk Enumerator (Microsoft)"
 devmanview.exe /disable "Enumerator of virtual network adapters NIC"
 devmanview.exe /disable "Remote Desktop Device Redirector Bus"
 devmanview.exe /disable "Base System Device"
-devmanview.exe /disable "Legacy device"
 devmanview.exe /disable "Microsoft Kernel Debug Network Adapter"
-devmanview.exe /disable "SM Bus Controller"
 devmanview.exe /disable "Numeric Data Processor"
 devmanview.exe /disable "System Speaker"
 devmanview.exe /disable "Microsoft Radio Device Enumeration Bus"
@@ -2191,25 +2199,18 @@ devmanview.exe /uninstall "File as Volume Driver"
 sc delete CompositeBus >nul
 sc delete NdisVirtualBus >nul
 sc delete umbus >nul
-Powershell -NonInteractive -NoLogo -NoProfile -Command "Disable-MMAgent -mc | Disable-WindowsErrorReporting | Disable-MMAgent -PageCombining | Disable-MMAgent -ApplicationPreLaunch"
-Powershell "Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.enable = $false; $_.psbase.put(); }"
 
 for /f "delims=:{}" %%a in ('wmic path Win32_SystemEnclosure get ChassisTypes ^| findstr [0-9]') do set "CHASSIS=%%j"
 set "DEVICE_TYPE=PC"
 for %%j in (8 9 10 11 12 13 14 18 21 30 31 32) do if "%CHASSIS%" == "%%j" (set "DEVICE_TYPE=LAPTOP")
 
 if "%DEVICE_TYPE%" == "LAPTOP" (
-    Reg.exe add "HKLM\System\CurrentControlSet\Services\serenum" /v "Start" /t REG_DWORD /d "3" /f >nul
-    Reg.exe add "HKLM\System\CurrentControlSet\Services\sermouse" /v "Start" /t REG_DWORD /d "3" /f >nul
-    Reg.exe add "HKLM\System\CurrentControlSet\Services\serial" /v "Start" /t REG_DWORD /d "3" /f >nul
     Reg.exe add "HKLM\System\CurrentControlSet\Services\wmiacpi" /v "Start" /t REG_DWORD /d "2" /f >nul
     Reg.exe add "HKLM\System\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "0" /f >nul
     powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
 )
 ) else (
-    Reg.exe add "HKLM\System\CurrentControlSet\Services\DisplayEnhancementService" /v "Start" /t REG_DWORD /d "4" /f >nul
     Reg.exe add "HKLM\System\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul
-    Reg.exe add "HKLM\System\CurrentControlSet\Services\wmiacpi" /v "Start" /t REG_DWORD /d "4" /f >nul
 )
 
 echo  !S_WHITE!Configuration Latency Tolerance...
@@ -2379,7 +2380,7 @@ for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersi
 for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},3" /t REG_DWORD /d "0" /f >nul
 for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},4" /t REG_DWORD /d "0" /f >nul
 
-shutdown -r -t 10
+shutdown -r -t 10 -c "Welcome DelusionOS"
 
 :Colors
 :: Credits to Artanis for colors
