@@ -9,7 +9,7 @@ DISM >nul || (
     exit /b 1
 )
 
-:: version 1.0 non-release 24H2 (8 october to release)
+:: version 1.0 non-release 24H2 (13 october to release)
 :: Delusion LLC
 :: working for script - hickerdicker, couwthynokap, clqwnless, e1uen
 :: license Attribution-NonCommercial 4.0 International
