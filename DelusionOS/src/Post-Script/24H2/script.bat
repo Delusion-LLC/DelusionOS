@@ -10,10 +10,10 @@ DISM >nul || (
 )
 
 :: version 1.0 non-release 24H2 (13 october to release)
+
 :: Delusion LLC
 :: working for script - hickerdicker, couwthynokap, clqwnless, e1uen
 :: license Attribution-NonCommercial 4.0 International
-
 :: Hello,
 :: Before I start, I would like to thank the following peoplers who helped me develop this project.
 :: Sharing your experiences and results github, twitter, discord
