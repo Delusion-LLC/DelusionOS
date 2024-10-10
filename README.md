@@ -47,8 +47,8 @@
 ## 🔗 Links
 - [🌎 Website](https://deluos.vercel.app/)
 - [🤖 Discord](https://dsc.gg/delusionos/)
-- [✉️ Telegram](https://t.me/DelusionOS/)
-- [🐤 Twitter](https://x.com/DelusionLLC)
+- [✉️ Telegram](https://t.me/DelusionGroup/)
+- [🐤 Twitter](https://x.com/DelusionLLC/)
 
 <a href="https://star-history.com/#Delusion-LLC/DelusionOS&Date">
  <picture>
