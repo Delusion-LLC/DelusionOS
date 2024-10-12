@@ -9,7 +9,7 @@ DISM >nul || (
     exit /b 1
 )
 
-:: version 1.0 non-release 24H2 (13 october to release)
+:: version 1.0 non-release 24H2 (17 october to release)
 
 :: Delusion LLC
 :: working for script - hickerdicker, couwthynokap, clqwnless, e1uen
@@ -287,8 +287,8 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\Themes" /v "Start" /t REG_DWORD 
 :: --- TWEAKS REGEDIT/GPEDIT ---
 echo  !S_GRAY!Configuring tweaks regedit...
 @REM Creator couwthynokap
-reg add "HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Permissions\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v "SensorPermissionState" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v "SensorPermissionState" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Permissions\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v "SensorPermissionState" /t REG_DWORD /d "0" /f >nul
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v "SensorPermissionState" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "CEIPEnable" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "MDMEnrollment" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d "0" /f >nul
@@ -296,7 +296,7 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaC
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "InkAndTypingPersonalizationEnabled" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /v "FaultTolerantHeap" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "NotifyUserOnOutOfSupport" /t REG_DWORD /d "0" /f >nul
-:: back to release.. (Mitigation.. setting for 24H2 pre-release is BSOD)
+:: back to release.. (Mitigation.. for 24H2)
 :: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "222222222222222" /f >nul
 :: Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "222222222222222" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Manufacturer" /t REG_SZ /d "DelusionOS 11" /f >nul
