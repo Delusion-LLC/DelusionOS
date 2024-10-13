@@ -2385,7 +2385,21 @@ for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersi
 for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},3" /t REG_DWORD /d "0" /f >nul
 for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},4" /t REG_DWORD /d "0" /f >nul
 
-shutdown -r -t 10 -c "Welcome DelusionOS"
+echo Clean Regedit / DirectX Shader Cache
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\HotStart" /f >nul
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Sidebar" /f >nul
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Telephony" /f >nul
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Screensavers" /f >nul
+reg delete "HKCU\Printers" /f >nul
+reg delete "HKLM\SYSTEM\ControlSet001\Control\Print" /f >nul
+reg delete "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Font Drivers" /v "Adobe Type Manager" /f >nul
+reg delete "HKLM\System\ControlSet001\Control\Terminal Server\Wds" /v "StartupPrograms" /f >nul
+DISM /Online /Remove-Capability /CapabilityName:Browser.InternetExplorer~~0.0.11.0 /norestart /quiet >nul
+DISM /Online /Remove-Capability /CapabilityName:MathRecognizer0.0.1.0 /norestart /quiet >nul
+DISM /Online /Remove-Capability /CapabilityName:Microsoft.Windows.PowerShell.ISE0.0.1.0 /norestart /quiet >nul
+DISM /Online /Remove-Capability /CapabilityName:OneCoreUAP.OneSync~~0.0.1.0 /norestart /quiet >nul
+cleanmgr /sageset:0
+shutdown -r -t 70 -с "70 sec for reboot pc"
 
 :Colors
 :: Credits to Artanis for colors
