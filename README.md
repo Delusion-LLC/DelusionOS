@@ -43,6 +43,10 @@
 
 [AMITXV](https://github.com/amitxv)
 
+[Bored](https://twitter.com/Bra1nlet)
+
+[NTLite Team](https://www.ntlite.com/community/index.php)
+
 [Catgamerop](https://x.com/CatGamerOP)
 
 [Spddl](https://github.com/spddl)
