@@ -2179,10 +2179,19 @@ powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\WwanSvc\Notifica
 powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\WwanSvc\OobeDiscovery" >nul 2>&1
 
 echo  !S_GRAY!Configuring boot windows...
+bcdedit /set {globalsettings} custom:16000067 true >nul
+bcdedit /set {globalsettings} custom:16000068 true >nul
+bcdedit /set {globalsettings} custom:16000069 true >nul
+bcdedit /timeout 0 >nul
 bcdedit /set hypervisorlaunchtype No >nul
 bcdedit /set isolatedcontext No >nul
 bcdedit /set vsmlaunchtype Off >nul
 bcdedit /set vm No >nul
+bcdedit /set allowedinmemorysettings 0 >nul
+bcdedit /set fircefipscrypto No >nul
+bcdedit /set perfmem 0
+bcdedit /set configflags 0
+bcdedit /deletevalue usefirmwarepcisettings >nul
 bcdedit /set quietboot Yes >nul
 bcdedit /set integrityservices disable >nul
 bcdedit /set nx AlwaysOff >nul
