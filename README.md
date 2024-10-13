@@ -2,7 +2,7 @@
 
 [24H2 Tracker Build's](https://github.com/Delusion-LLC/DelusionOS/blob/main/DelusionOS/24H2.md)
 
-[Q&A](https://github.com/Delusion-LLC/DelusionOS/blob/DelusionOS/Q&A.md)
+[Q&A](https://github.com/Delusion-LLC/DelusionOS/blob/main/DelusionOS/Q&A.md)
 
 ## [Server Link](https://dsc.gg/delusionos)
 
