@@ -14,17 +14,6 @@ DISM >nul || (
 :: Delusion LLC
 :: working for script - hickerdicker, couwthynokap, clqwnless, e1uen
 :: license Attribution-NonCommercial 4.0 International
-:: Hello,
-:: Before I start, I would like to thank the following peoplers who helped me develop this project.
-:: Sharing your experiences and results github, twitter, discord
-:: clqwnless / https://github.com/clqwnless
-:: couwthynokap / https://github.com/couwthynokap
-:: hickerdicker / https://github.com/hickerdicker
-:: imribiy / https://github.com/imribiy
-:: ChrisTitusTech / https://github.com/ChrisTitusTech
-:: AMITXV / https://github.com/amitxv
-:: Catgamerop / https://x.com/CatGamerOP
-:: Spddl / https://github.com/spddl
 
 call :Colors
 
