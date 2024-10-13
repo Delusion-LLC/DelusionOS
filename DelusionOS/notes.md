@@ -1,5 +1,6 @@
-<!-- credits
-hickerdicker / https://github.com/hickerdicker -->
+<!-- 
+credits hickerdicker / https://github.com/hickerdicker
+credits e1uen / https://github.com/e1uen
+-->
 
-new notes for 7 october
-
+<!-- . -->
