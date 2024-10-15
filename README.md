@@ -31,25 +31,17 @@
 #### Other components that do not require general publicity
 
 ## ©️ Acknowledgments
-[clqwnless](https://github.com/clqwnless)
-
-[couwthynokap](https://github.com/couwthynokap)
-
-[hickerdicker](https://github.com/hickerdicker)
-
-[imribiy](https://github.com/imribiy)
-
-[ChrisTitusTech](https://github.com/ChrisTitusTech)
-
-[AMITXV](https://github.com/amitxv)
-
-[Bored](https://twitter.com/Bra1nlet)
-
-[NTLite Team](https://www.ntlite.com/community/index.php)
-
-[Catgamerop](https://x.com/CatGamerOP)
-
-[Spddl](https://github.com/spddl)
+[Amit](https://twitter.com/amitxv), 
+[Bored](https://twitter.com/Bra1nlet), [Calypto](https://twitter.com/CaIypto), [CatGamerOP](https://twitter.com/CatGamerOP),
+[Chris Titus Tech](https://twitter.com/christitustech), [Melody](https://sites.google.com/view/melodystweaks/), 
+[Imribiy](https://twitter.com/imribiy), [Phlegm](https://twitter.com/getggos), [TenForums](https://www.tenforums.com/), [Timecard](https://github.com/djdallmann/GamingPCSetup), 
+[IIIЕX0III](https://discord.gg/qEWGUAGXCq), 
+[BEYOND PERFORMANCE](https://discord.gg/xk3HKVPyef),
+[clqwnless](https://github.com/clqwnless),
+[couwthynokap](https://github.com/couwthynokap),
+[hickerdicker](https://github.com/hickerdicker),
+[NTLite Team](https://www.ntlite.com/community/index.php),
+[Spddl](https://github.com/spddl), and etc.
 
 ## 🔗 Links
 - [🌎 Website](https://deluos.vercel.app/)
