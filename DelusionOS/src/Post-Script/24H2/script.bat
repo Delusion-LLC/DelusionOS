@@ -808,6 +808,14 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage" /v "1252" /t RE
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage" /v "1253" /t REG_SZ /d "c_1251.nls" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage" /v "1254" /t REG_SZ /d "c_1251.nls" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage" /v "1255" /t REG_SZ /d "c_1251.nls" /f >nul
+Reg.exe add "HKCR\*\shell\runas" /ve /t REG_SZ /d "Take Ownership" /f >nul
+Reg.exe add "HKCR\*\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f >nul
+Reg.exe add "HKCR\*\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" && ica \"%%1\" /grant administrators:F" /f >nul
+Reg.exe add "HKCR\*\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" && ica \"%%1\" /grant administrators:F" /f >nul
+Reg.exe add "HKCR\Directory\shell\runas" /ve /t REG_SZ /d "Take Ownership" /f >nul
+Reg.exe add "HKCR\Directory\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f >nul
+Reg.exe add "HKCR\Directory\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" /r /d y && ica \"%%1\" /grant administrators:F /t" /f >nul
+Reg.exe add "HKCR\Directory\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" /r /d y && ica \"%%1\" /grant administrators:F /t" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0001" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0002" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f >nul
