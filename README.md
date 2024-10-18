@@ -35,8 +35,6 @@
 [Bored](https://twitter.com/Bra1nlet), [Calypto](https://twitter.com/CaIypto), [CatGamerOP](https://twitter.com/CatGamerOP),
 [Chris Titus Tech](https://twitter.com/christitustech), [Melody](https://sites.google.com/view/melodystweaks/), 
 [Imribiy](https://twitter.com/imribiy), [Phlegm](https://twitter.com/getggos), [TenForums](https://www.tenforums.com/), [Timecard](https://github.com/djdallmann/GamingPCSetup), 
-[IIIЕX0III](https://discord.gg/qEWGUAGXCq), 
-[BEYOND PERFORMANCE](https://discord.gg/xk3HKVPyef),
 [clqwnless](https://github.com/clqwnless),
 [couwthynokap](https://github.com/couwthynokap),
 [hickerdicker](https://github.com/hickerdicker),
