@@ -4,8 +4,6 @@
 
 [Q&A](https://github.com/Delusion-LLC/DelusionOS/blob/main/DelusionOS/Q&A.md)
 
-## [Server Link](https://dsc.gg/delusionos)
-
 ## Supported Builds:
 - Windows 11 24H2 `26100`
 
@@ -17,7 +15,7 @@
 - Windows Defender & Security Health Service & Windows Firewall
 - Windows Backup/Restore Points
 - Windows Sandbox
-- Windows Autopilot/Recall
+- Windows Autopilot <!-- Recall -->
 - Hyper-V
 - Notifications
 - Microsoft Store
@@ -33,8 +31,8 @@
 ## ©️ Acknowledgments
 [Amit](https://twitter.com/amitxv), 
 [Bored](https://twitter.com/Bra1nlet), [Calypto](https://twitter.com/CaIypto), [CatGamerOP](https://twitter.com/CatGamerOP),
-[Chris Titus Tech](https://twitter.com/christitustech), [Melody](https://sites.google.com/view/melodystweaks/), 
-[Imribiy](https://twitter.com/imribiy), [Phlegm](https://twitter.com/getggos), [TenForums](https://www.tenforums.com/), [Timecard](https://github.com/djdallmann/GamingPCSetup), 
+[Chris Titus Tech](https://twitter.com/christitustech), 
+[Imribiy](https://twitter.com/imribiy), [TenForums](https://www.tenforums.com/), [Timecard](https://github.com/djdallmann/GamingPCSetup), 
 [clqwnless](https://github.com/clqwnless),
 [couwthynokap](https://github.com/couwthynokap),
 [hickerdicker](https://github.com/hickerdicker),
