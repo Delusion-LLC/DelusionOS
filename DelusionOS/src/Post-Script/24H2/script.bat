@@ -711,8 +711,6 @@ Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRun
 Reg.exe add "HKCU\Software\Microsoft\input" /v "IsInputAppPreloadEnabled" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Dsh" /v "IsPrelaunchEnabled" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d "1" /f >nul
-Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d "1" /f >nul
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests" /v "value" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS" /v "EnableGR535" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SYSTEM\ControlSet001\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583" /v "ValueMax" /t REG_DWORD /d "0" /f >nul
@@ -2179,37 +2177,14 @@ echo  !B_BLACK!fixing languages if needed
 REG ADD "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "DoNotConnectToWindowsUpdateInternetLocations" /t REG_DWORD /d "0" /f >nul
 REG ADD "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "UseWUServer" /t REG_DWORD /d "0" /f >nul
 
-echo  !B_BLACK!Enabling MSI mode & set to undefined
-for /f %%c in ('wmic path Win32_USBController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f
-for /f %%c in ('wmic path Win32_USBController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg delete "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f >nul 2>nul
-:: Probably will be reset by installing GPU driver
-for /f %%c in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f
-for /f %%c in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f >nul 2>nul
-for /f %%c in ('wmic path Win32_NetworkAdapter get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f
-for /f %%c in ('wmic path Win32_IDEController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f
-for /f %%c in ('wmic path Win32_IDEController get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f >nul 2>nul
-for /f %%c in ('wmic path Win32_NetworkAdapter get PNPDeviceID^| findstr /L "PCI\VEN_"') do reg add "HKLM\System\CurrentControlSet\Enum\%%c\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /f >nul 2>nul
-:: Fix VMware
-wmic computersystem get manufacturer /format:value | findstr /i /C:VMWare && (
-    for /f %%a in ('wmic path Win32_NetworkAdapter get PNPDeviceID ^| findstr /l "PCI\VEN_"') do (
-        reg add "HKLM\System\CurrentControlSet\Enum\%%a\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /t REG_DWORD /d "2"  /f > nul 2>nul
-    )
-)
-
 echo  !B_BLACK!Configuring boot windows...
-bcdedit /set {globalsettings} custom:16000067 true >nul
-bcdedit /set {globalsettings} custom:16000068 true >nul
-bcdedit /set {globalsettings} custom:16000069 true >nul
-bcdedit /timeout 0 >nul
 bcdedit /set hypervisorlaunchtype No >nul
 bcdedit /set isolatedcontext No >nul
 bcdedit /set vsmlaunchtype Off >nul
 bcdedit /set vm No >nul
 bcdedit /set allowedinmemorysettings 0 >nul
-bcdedit /set fircefipscrypto No >nul
 bcdedit /set perfmem 0
 bcdedit /set configflags 0
-bcdedit /deletevalue usefirmwarepcisettings >nul
 bcdedit /set quietboot Yes >nul
 bcdedit /set integrityservices disable >nul
 bcdedit /set nx AlwaysOff >nul
@@ -2240,10 +2215,8 @@ devmanview.exe /disable "Base System Device"
 devmanview.exe /disable "Composite Bus Enumerator"
 devmanview.exe /disable "UMBus Root Bus Enumerator"
 devmanview.exe /disable "Direct memory access controller"
-devmanview.exe /disable "Generic Bluetooth Adapter"
 devmanview.exe /disable "Intel SMBus"
 devmanview.exe /disable "System Speaker"
-devmanview.exe /disable "Intel(R) Display Audio"
 devmanview.exe /disable "Programmable Interrupt Controller"
 devmanview.exe /disable "Legacy device"
 devmanview.exe /disable "Microsoft Device Association Root Enumerator"
@@ -2263,7 +2236,6 @@ set "DEVICE_TYPE=PC"
 for %%j in (8 9 10 11 12 13 14 18 21 30 31 32) do if "%CHASSIS%" == "%%j" (set "DEVICE_TYPE=LAPTOP")
 
 if "%DEVICE_TYPE%" == "LAPTOP" (
-    Reg.exe add "HKLM\System\CurrentControlSet\Services\wmiacpi" /v "Start" /t REG_DWORD /d "2" /f >nul
     Reg.exe add "HKLM\System\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "0" /f >nul
     powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
 )
@@ -2271,7 +2243,7 @@ if "%DEVICE_TYPE%" == "LAPTOP" (
     Reg.exe add "HKLM\System\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul
 )
 
-echo  !S_GRAY!Configuration Latency Tolerance...
+echo  !B_BLACK!Configuration Latency Tolerance...
 @rem Creator couwthynokap
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl" /v "MonitorLatencyTolerance" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl" /v "MonitorRefreshLatencyTolerance" /t REG_DWORD /d "1" /f >nul
@@ -2427,11 +2399,7 @@ powershell Set-NetAdapterAdvancedProperty -AllProperties -Name "*" -RegistryKeyw
 powershell Set-NetAdapterAdvancedProperty -AllProperties -Name "*" -RegistryKeyword "EnableLLI" -RegistryValue "1" >nul
 powershell Set-NetAdapterAdvancedProperty -AllProperties -Name "*" -RegistryKeyword "*SSIdleTimeout" -RegistryValue "60" >nul
 
-echo  !B_BLACK!Storage Tweaks apply..
-for %%z in (EnableHIPM EnableDIPM EnableHDDParking) do for /f "delims=" %%z in ('reg query "HKLM\System\CurrentControlSet\Services" /s /f "%%z" ^| findstr "HKEY"') do Reg.exe add "%%z" /v "%%z" /t REG_DWORD /d "0" /f >nul
-cls
-
-echo  !S_GRAY!Disabling NetBIOS over TCP/UPD...
+echo  !B_BLACK!Disabling NetBIOS over TCP/UPD...
     for /f "delims=" %%u in ('reg query "HKLM\System\CurrentControlSet\Services\NetBT\Parameters\Interfaces" /s /f "NetbiosOptions" ^| findstr "HKEY"') do (
         Reg.exe add "%%u" /v "NetbiosOptions" /t REG_DWORD /d "2" /f
     )
@@ -2457,7 +2425,7 @@ DISM /Online /Remove-Capability /CapabilityName:MathRecognizer0.0.1.0 /norestart
 DISM /Online /Remove-Capability /CapabilityName:Microsoft.Windows.PowerShell.ISE0.0.1.0 /norestart /quiet >nul
 DISM /Online /Remove-Capability /CapabilityName:OneCoreUAP.OneSync~~0.0.1.0 /norestart /quiet >nul
 cleanmgr /sageset:0
-shutdown -r -t 70 -с "70 sec for reboot pc"
+shutdown -r -t 10
 
 :Colors
 :: Credits to Artanis for colors
