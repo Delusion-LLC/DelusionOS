@@ -1,4 +1,7 @@
-@echo off && SetLocal EnableDelayedExpansion && title POST-INSTALL && mode con: cols=90 lines=20
+@echo off
+SetLocal EnableDelayedExpansion
+title POST-INSTALL
+mode con: cols=90 lines=20
 
 :: request administrator privileges
 DISM >nul || (
