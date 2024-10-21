@@ -2164,8 +2164,8 @@ bcdedit /set bootmenupolicy legacy >nul
 bcdedit /set {current} description "DelusionOS 24H2" >nul
 label C: DelusionOS 24H2 >nul
 
-powercfg -import "%windir%\deluos.pow" 00000000-16f6-45a6-9fcf-0fa130b83c00 >nul
-powercfg -setactive 00000000-16f6-45a6-9fcf-0fa130b83c00 >nul
+powercfg -import "%windir%\deluos.pow" 00000000-16f6-45a6-9fcf-0fa130b83c01 >nul
+powercfg -setactive 00000000-16f6-45a6-9fcf-0fa130b83c01 >nul
 powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >nul
 for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~l/Diagnostic /e:false)
 
