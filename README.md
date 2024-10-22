@@ -34,19 +34,17 @@ When you choose DelusionOS, you get not just an operating system, but a powerful
 - Windows 11 24H2 `26100`
 
 ## Unsupported List:
-- Install the image via "setup.exe" / Media Creation Tool (use Rufus / Ventoy or other deployment utilities).
+- Install the image via "setup.exe" / Media Creation Tool (useless Rufus / Ventoy or other deployment utilities).
 - Bitlocker Drive Encryption
 - Windows To Go
 - Speech recognition
-- Windows Defender & Security Health Service & Windows Firewall
+- Windows Defender
 - Windows Backup/Restore Points
 - Windows Sandbox
 - Windows Autopilot <!-- Recall -->
 - Hyper-V
 - Notifications
 - Microsoft Store
-- Account synchronization
-- Location Services
 - Telephony
 - NFC/POS devices
 - Cortana
