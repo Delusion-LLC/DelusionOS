@@ -91,10 +91,10 @@ reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\Firew
 Reg.exe add "HKCU\Software\Microsoft\Office\Common\ClientTelemetry" /v "DisableTelemetry" /t REG_DWORD /d "1" /f
 
 for %%x in ("Application Experience\Microsoft Compatibility Appraiser" "Application Experience\AitAgent" "Application Experience\ProgramDataUpdater"
-    "Application Experience\StartupAppTask" "Customer Experience Improvement Program\Consolidator"
+    "Application Experience\StartupAppTask" "Customer Experience Improvement Program\Consolidator" "Power Efficiency\Power Efficiency"
 	"Customer Experience Improvement Program\KernelCeipTask" "Customer Experience Improvement Program\UsbCeip"
     "Customer Experience Improvement Program\Uploader" "Autochk\Proxy" "CloudExperienceHost\CreateObjectTask"
-    "DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" "DiskFootprint\Diagnostics"
+    "DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" "DiskFootprint\Diagnostics" "Speech\Speech"
     "UpdateOrchestrator\Schedule Scan" "WindowsUpdate\Scheduled Start" "Servicing\StartComponentCleanup" 
     "Recovery Environment\VerifyWinRE" "EDP\StorageCardEncryption Task" "BitLocker\BitLocker Encrypt All Drives" 
     "BitLocker\BitLocker MDM policy Refresh" "International\Synchronize Language Settings") do schtasks /change /tn "\Microsoft\Windows\%%~x" /disable
