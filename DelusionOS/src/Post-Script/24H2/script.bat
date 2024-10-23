@@ -16,7 +16,7 @@ DISM >nul || (
 :: working for script - hickerdicker, couwthynokap, clqwnless, e1uen
 :: license Attribution-NonCommercial 4.0 International
 
-call :Colors
+call :colors
 timeout /t 3 /nobreak > NUL
 
 echo  !B_BLACK!Execution Policy To Unrestricted...
