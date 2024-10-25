@@ -93,12 +93,8 @@ Reg.exe add "HKCU\Software\Microsoft\Office\Common\ClientTelemetry" /v "DisableT
 for %%x in ("Application Experience\Microsoft Compatibility Appraiser" "Application Experience\AitAgent" "Application Experience\ProgramDataUpdater"
     "Application Experience\StartupAppTask" "Customer Experience Improvement Program\Consolidator" "Power Efficiency\Power Efficiency"
 	"Customer Experience Improvement Program\KernelCeipTask" "Customer Experience Improvement Program\UsbCeip"
-    "Customer Experience Improvement Program\Uploader" "Autochk\Proxy" "CloudExperienceHost\CreateObjectTask"
-    "DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" "DiskFootprint\Diagnostics" "Speech\Speech"
-    "UpdateOrchestrator\Schedule Scan" "WindowsUpdate\Scheduled Start" "Servicing\StartComponentCleanup" 
-    "Recovery Environment\VerifyWinRE" "EDP\StorageCardEncryption Task" "BitLocker\BitLocker Encrypt All Drives" 
-    "BitLocker\BitLocker MDM policy Refresh" "International\Synchronize Language Settings") do schtasks /change /tn "\Microsoft\Windows\%%~x" /disable
-for %%p in ("InstallService\ScanForUpdates" "InstallService\ScanForUpdatesAsUser" "InstallService\SmartRetry" "\Microsoft\Windows\Defrag\ScheduledDefrag") do schtasks /change /tn "\Microsoft\Windows\%%~p" /disable
+    "Customer Experience Improvement Program\Uploader" "Speech\Speech" "Servicing\StartComponentCleanup" "BitLocker\BitLocker Encrypt All Drives" 
+    "BitLocker\BitLocker MDM policy Refresh") do schtasks /change /tn "\Microsoft\Windows\%%~x" /disable
 
 :: --- SERVICES ---
 echo  !B_BLACK!Configuring Services...
@@ -282,6 +278,7 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaC
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "InkAndTypingPersonalizationEnabled" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /v "FaultTolerantHeap" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "NotifyUserOnOutOfSupport" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKCU\SOFTWARE\Microsoft\MediaPlayer\Preferences" /v "UsageTracking" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Manufacturer" /t REG_SZ /d "DelusionOS 11" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model" /t REG_SZ /d "DelusionOS 24H2" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "https://dsc.gg/delusionos/" /f >nul
