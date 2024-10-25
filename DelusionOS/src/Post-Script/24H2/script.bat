@@ -27,7 +27,6 @@ C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershe
 setx DOTNET_CLI_TELEMETRY_OPTOUT 1 & setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul
 
 echo  !B_BLACK!Configuration for start...
-taskkill /f /im smartscreen.exe >nul & ren C:\Windows\System32\smartscreen.exe smartscreen.exee
 net accounts /maxpwage:unlimited >nul
 Reg.exe add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "C:\%windir%\deluos.jpg" /f >nul
 timeout /t 1 /nobreak > NUL
