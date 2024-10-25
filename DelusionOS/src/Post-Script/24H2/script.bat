@@ -34,10 +34,10 @@ timeout /t 1 /nobreak > NUL
 
 :: --- Packages DelusionOS ---
 echo  !S_GRAY!Install Visual AIO Libraries..
-"%windir%"\Visual AIO.exe /aiA /gm2 > NUL 2>&1
+"%windir%"\Visual AIO.exe /aiA /gm2 >nul
 
 echo  !S_GRAY!Install DirectX...
-"%windir%"\dxwebsetup.exe /silent > NUL 2>&1
+"%windir%"\dxwebsetup.exe /silent >nul
 
 :: --- MOUSE TWEAKS ---
 echo  !B_BLACK!Configuring Mouse tweaks...
@@ -95,6 +95,13 @@ for %%x in ("Application Experience\Microsoft Compatibility Appraiser" "Applicat
 	"Customer Experience Improvement Program\KernelCeipTask" "Customer Experience Improvement Program\UsbCeip"
     "Customer Experience Improvement Program\Uploader" "Speech\Speech" "Servicing\StartComponentCleanup" "BitLocker\BitLocker Encrypt All Drives" 
     "BitLocker\BitLocker MDM policy Refresh") do schtasks /change /tn "\Microsoft\Windows\%%~x" /disable
+
+schtasks /change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack" /disable >nul
+schtasks /change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn" /disable >nul
+schtasks /change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack2016" /disable >nul
+schtasks /change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn2016" /disable >nul
+schtasks /change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /disable >nul
+schtasks /change /TN "Microsoft\Office\Office 16 Subscription Heartbeat" /disable >nul
 
 :: --- SERVICES ---
 echo  !B_BLACK!Configuring Services...
