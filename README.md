@@ -53,7 +53,7 @@ When you choose DelusionOS, you get not just an operating system, but a powerful
 #### Other components that do not require general publicity
 
 ## ©️ Acknowledgments
-[Amit](https://twitter.com/amitxv), 
+[Amitxv](https://twitter.com/amitxv), 
 [Bored](https://twitter.com/Bra1nlet), [Calypto](https://twitter.com/CaIypto), [CatGamerOP](https://twitter.com/CatGamerOP),
 [Chris Titus Tech](https://twitter.com/christitustech), 
 [Imribiy](https://twitter.com/imribiy), [TenForums](https://www.tenforums.com/), [Timecard](https://github.com/djdallmann/GamingPCSetup), 
