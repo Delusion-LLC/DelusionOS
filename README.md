@@ -4,6 +4,11 @@
 
 [Q&A](https://github.com/Delusion-LLC/DelusionOS/blob/main/DelusionOS/Q&A.md)
 
+#### 🌐 Change language
+*[China](https://github.com/Delusion-LLC/DelusionOS/blob/main/README-ZH.md)* , *[Uknaine](https://github.com/Delusion-LLC/DelusionOS/blob/main/README-UA.md)*
+
+---
+
 #### DelusionOS is a custom operating system designed to unlock the full potential of performance and ensure minimal latency in all environments. Ideal for cyber sports gaming, DelusionOS allows users to reach new heights in gameplay by providing unrivaled levels of responsiveness and stability. With this system, you can maximize your gaming experience and enjoy every moment in the virtual world.
 
 Why choose the DelusionOS build?
@@ -31,6 +36,9 @@ When you choose DelusionOS, you get not just an operating system, but a powerful
 - Optimized for cyber sports gaming: Our build is designed with the needs of cyber athletes and gamers in mind. Delusion OS includes pre-installed tools and tweaks to help improve the gaming experience, including graphics optimization, resource management, and support for modern gaming technologies.
 
 ## Supported Builds:
+<!--
+- Windows 12 25H2 `---`
+-->
 - Windows 11 24H2 `26100`
 
 ## Unsupported List:
@@ -53,10 +61,14 @@ When you choose DelusionOS, you get not just an operating system, but a powerful
 #### Other components that do not require general publicity
 
 ## ©️ Acknowledgments
-[Amitxv](https://twitter.com/amitxv), 
-[Bored](https://twitter.com/Bra1nlet), [Calypto](https://twitter.com/CaIypto), [CatGamerOP](https://twitter.com/CatGamerOP),
-[Chris Titus Tech](https://twitter.com/christitustech), 
-[Imribiy](https://twitter.com/imribiy), [TenForums](https://www.tenforums.com/), [Timecard](https://github.com/djdallmann/GamingPCSetup), 
+[Amitxv](https://twitter.com/amitxv),
+[Bored](https://twitter.com/Bra1nlet),
+[Calypto](https://twitter.com/CaIypto),
+[CatGamerOP](https://twitter.com/CatGamerOP),
+[Chris Titus Tech](https://twitter.com/christitustech),
+[Imribiy](https://twitter.com/imribiy),
+[TenForums](https://www.tenforums.com/),
+[Timecard](https://github.com/djdallmann/GamingPCSetup),
 [clqwnless](https://github.com/clqwnless),
 [couwthynokap](https://github.com/couwthynokap),
 [hickerdicker](https://github.com/hickerdicker),
