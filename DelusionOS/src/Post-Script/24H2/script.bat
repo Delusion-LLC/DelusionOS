@@ -111,29 +111,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dhcp" /v "DependOnService" /
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache" /v "DependOnService" /t REG_MULTI_SZ /d "nsi" /f >nul
 
 :: Disabled Windows Defender
-"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -DisableService
 reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\MDCoreSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
-sc config wscsvc start=disabled & sc stop wscsvc
-
-:: Disabled bluetooh
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\bluetoothuserservice" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\btagservice" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\bthserv" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\btha2dp" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\bthenum" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\bthhfenum" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\bthleenum" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\bthmini" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\bthmodem" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\bthport" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\bthusb" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\hidbth" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\microsoft_bluetooth_avrcptransport" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\rfcomm" /v "Start" /t REG_DWORD /d "4" /f >nul
-devmanview.exe /disable "Generic Bluetooth Adapter"
-powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\Bluetooth\UninstallDeviceTask" >nul
 
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\wercplsupport" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\AJRouter" /v "Start" /t REG_DWORD /d "4" /f >nul
