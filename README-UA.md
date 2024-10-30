@@ -18,18 +18,15 @@
 - Bitlocker Drive Encryption
 - Windows To Go
 - Розпізнавання мовлення
-- Windows Defender
 - Точки резервного копіювання/відновлення Windows
 - Windows Sandbox
 - Windows Autopilot <!-- Recall -->
 - Hyper-V
 - Сповіщення
 - Microsoft Store
-- Телефонія
 - NFC/POS пристрої
 - Кортана
 - Оновлення Windows
-- Bitlocker
 #### Інші компоненти, які не вимагають загального розголосу
 
 ## ©️ Подяка
