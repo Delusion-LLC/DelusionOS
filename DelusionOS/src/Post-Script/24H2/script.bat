@@ -129,9 +129,6 @@ schtasks /change /tn "Microsoft\Office\OfficeTelemetryAgentLogOn" /disable >nul
 schtasks /change /tn "Microsoft\Office\Office 15 Subscription Heartbeat" /disable >nul
 schtasks /change /tn "Microsoft\Windows\Maintenance\WinSAT" /disable >nul
 schtasks /change /tn "Microsoft\Windows\Autochk\Proxy" /disable >nul
-schtasks /change /tn "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable >nul
-schtasks /change /tn "Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable >nul
-schtasks /change /tn "Microsoft\Windows\Application Experience\StartupAppTask" /disable >nul
 schtasks /change /tn "Microsoft\Windows\PI\Sqm-Tasks" /disable >nul
 schtasks /change /tn "Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable >nul
 schtasks /change /tn "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable >nul
