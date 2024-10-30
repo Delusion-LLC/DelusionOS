@@ -28,7 +28,6 @@
 - NFC/POS devices
 - Cortana
 - Windows update
-- Bitlocker
 #### Other components that do not require general publicity
 
 ## ©️ Acknowledgments
