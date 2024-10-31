@@ -29,9 +29,10 @@ setx DOTNET_CLI_TELEMETRY_OPTOUT 1 & setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul
 
 echo  !B_BLACK!Configuration for start...
 net accounts /maxpwage:unlimited >nul
-for %s in ("SysWOW64" "System32") do (if exist "%windir%\%~a\OneDriveSetup.exe" ("%windir%\%~s\OneDriveSetup.exe" /uninstall)) && reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f >nul
+for %s in ("SysWOW64" "System32") do (if exist "%windir%\%~s\OneDriveSetup.exe" ("%windir%\%~s\OneDriveSetup.exe" /uninstall)) && reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f >nul
 rd /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
 taskkill /f /im smartscreen.exe >nul & ren C:\Windows\System32\smartscreen.exe smartscreen.exee
+PowerShell Get-AppxPackage | Where-Object { $_.Name -notlike "*Microsoft.WindowsStore*" -and $_.Name -notlike "*AppInstaller*" -and $_.Name -notlike "*Snip*" -and $_.Name -notlike "*Xbox.TCUI*" -and $_.Name -notlike "*XboxApp*" -and $_.Name -notlike "*XboxGameCallableUI*" -and $_.Name -notlike "*XboxGameOverlay*" -and $_.Name -notlike "*Xbox.TCUI*" -and $_.Name -notlike "*XboxGameOverlay*" -and $_.Name -notlike "*XboxGamingOverlay*" -and $_.Name -notlike "*XboxIdenitity*" -and $_.Name -notlike "*XboxSpeechToTextOverlay*" -and $_.Name -notlike "*SecHealthUI*" -and $_.Name -notlike "*Microsoft.Notepad*" } | Remove-AppxPackage
 Reg.exe add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "C:\%windir%\deluos.jpg" /f >nul
 timeout /t 1 /nobreak > NUL
 
@@ -699,13 +700,13 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage" /v "1252" /t RE
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage" /v "1253" /t REG_SZ /d "c_1251.nls" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage" /v "1254" /t REG_SZ /d "c_1251.nls" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage" /v "1255" /t REG_SZ /d "c_1251.nls" /f >nul
-Reg.exe add "HKCR\*\shell\runas" /ve /t REG_SZ /d "Take Ownership" /f >nul
+Reg.exe add "HKCR\*\shell\runas" /v /t REG_SZ /d "Take Ownership" /f >nul
 Reg.exe add "HKCR\*\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f >nul
-Reg.exe add "HKCR\*\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" && ica \"%%1\" /grant administrators:F" /f >nul
+Reg.exe add "HKCR\*\shell\runas\command" /v /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" && ica \"%%1\" /grant administrators:F" /f >nul
 Reg.exe add "HKCR\*\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" && ica \"%%1\" /grant administrators:F" /f >nul
-Reg.exe add "HKCR\Directory\shell\runas" /ve /t REG_SZ /d "Take Ownership" /f >nul
+Reg.exe add "HKCR\Directory\shell\runas" /v /t REG_SZ /d "Take Ownership" /f >nul
 Reg.exe add "HKCR\Directory\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f >nul
-Reg.exe add "HKCR\Directory\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" /r /d y && ica \"%%1\" /grant administrators:F /t" /f >nul
+Reg.exe add "HKCR\Directory\shell\runas\command" /v /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" /r /d y && ica \"%%1\" /grant administrators:F /t" /f >nul
 Reg.exe add "HKCR\Directory\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" /r /d y && ica \"%%1\" /grant administrators:F /t" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0001" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f >nul
@@ -722,7 +723,6 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nls\CodePage" /v "ACP" /t REG
 Reg.exe add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_HonorUserFSEBehaviorMode" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "LargeSystemCache" /t REG_DWORD /d "0" /f >nul
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\MMCSS" /v "Start" /t REG_DWORD /d "2" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "FastSendDatagramThreshold" /t REG_DWORD /d "65536" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "MaximumPortsServiced" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "SendOutputToAllPorts" /t REG_DWORD /d "0" /f >nul
