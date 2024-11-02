@@ -1,7 +1,4 @@
-@echo off
-SetLocal EnableDelayedExpansion
-title POST-INSTALL
-mode con: cols=90 lines=20
+@echo off && SetLocal EnableDelayedExpansion && title System Setup... && mode con: cols=90 lines=20
 
 :: request administrator privileges
 DISM >nul || (
@@ -32,16 +29,16 @@ net accounts /maxpwage:unlimited >nul
 for %s in ("SysWOW64" "System32") do (if exist "%windir%\%~s\OneDriveSetup.exe" ("%windir%\%~s\OneDriveSetup.exe" /uninstall)) && reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f >nul
 rd /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
 taskkill /f /im smartscreen.exe >nul & ren C:\Windows\System32\smartscreen.exe smartscreen.exee
-PowerShell Get-AppxPackage | Where-Object { $_.Name -notlike "*Microsoft.WindowsStore*" -and $_.Name -notlike "*AppInstaller*" -and $_.Name -notlike "*Snip*" -and $_.Name -notlike "*Xbox.TCUI*" -and $_.Name -notlike "*XboxApp*" -and $_.Name -notlike "*XboxGameCallableUI*" -and $_.Name -notlike "*XboxGameOverlay*" -and $_.Name -notlike "*Xbox.TCUI*" -and $_.Name -notlike "*XboxGameOverlay*" -and $_.Name -notlike "*XboxGamingOverlay*" -and $_.Name -notlike "*XboxIdenitity*" -and $_.Name -notlike "*XboxSpeechToTextOverlay*" -and $_.Name -notlike "*SecHealthUI*" -and $_.Name -notlike "*Microsoft.Notepad*" } | Remove-AppxPackage
+PowerShell Get-AppxPackage | Where-Object { $_.Name -notlike "*Microsoft.WindowsStore*" -and $_.Name -notlike "*AppInstaller*" -and $_.Name -notlike "*Xbox.TCUI*" -and $_.Name -notlike "*XboxApp*" -and $_.Name -notlike "*XboxGameCallableUI*" -and $_.Name -notlike "*XboxGameOverlay*" -and $_.Name -notlike "*Xbox.TCUI*" -and $_.Name -notlike "*XboxGameOverlay*" -and $_.Name -notlike "*XboxGamingOverlay*" -and $_.Name -notlike "*XboxIdenitity*" -and $_.Name -notlike "*XboxSpeechToTextOverlay*" -and $_.Name -notlike "*SecHealthUI*" -and $_.Name -notlike "*Microsoft.Notepad*" } | Remove-AppxPackage
 Reg.exe add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "C:\%windir%\deluos.jpg" /f >nul
 timeout /t 1 /nobreak > NUL
 
 :: --- Packages DelusionOS ---
 echo  !S_GRAY!Install Visual AIO Libraries..
-"%windir%"\Visual AIO.exe /aiA /gm2 >nul
+"%windir%\Visual AIO.exe" /aiA /gm2 >nul
 
 echo  !S_GRAY!Install DirectX...
-"%windir%"\dxwebsetup.exe /silent >nul
+"%windir%\dxwebsetup.exe" /silent >nul
 
 :: --- MOUSE TWEAKS ---
 echo  !B_BLACK!Configuring Mouse tweaks...
@@ -86,6 +83,9 @@ reg add "HKCU\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f >nul
 reg add "HKCU\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f >nul
 
 :: --- SCHEDULED TASKS ---
+:: DO NOT DISABLED SCHEDULED TASKS IT'S FOR BSOD.
+:: If you want to disable all tasks, you can lose the functionality of the system, catch bugs. I do not advise disabling the full system
+:: MAY DISABLED TELEMETRY/UPDATE/Agents
 echo  !B_BLACK!Configuring Scheduled Tasks...
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /f && reg add "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /f >nul
 Reg.exe add "HKCU\Software\Microsoft\Office\Common\ClientTelemetry" /v "DisableTelemetry" /t REG_DWORD /d "1" /f
@@ -108,9 +108,6 @@ schtasks /change /tn "Microsoft\Windows\DiskFootprint\Diagnostics" /disable >nul
 schtasks /change /tn "Microsoft\Windows\DiskFootprint\StorageSense" /disable >nul
 schtasks /change /tn "Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload" /disable >nul
 schtasks /change /tn "Microsoft\Windows\Feedback\Siuf\DmClient" /disable >nul
-schtasks /change /tn "Microsoft\Windows\International\Synchronize Language Settings" /disable >nul
-schtasks /change /tn "Microsoft\Windows\LanguageComponentsInstaller\Installation" /disable >nul
-schtasks /change /tn "Microsoft\Windows\LanguageComponentsInstaller\ReconcileLanguageResources" /disable >nul
 schtasks /change /tn "Microsoft\Windows\Maps\MapsUpdateTask" /disable >nul
 schtasks /change /tn "Microsoft\Windows\Maps\MapsToastTask" /disable >nul
 schtasks /change /tn "Microsoft\Windows\PushToInstall\Registration" /disable >nul
@@ -125,11 +122,10 @@ schtasks /change /tn "Microsoft\Office\OfficeTelemetry\AgentFallBack2016" /disab
 schtasks /change /tn "Microsoft\Office\OfficeTelemetry\OfficeTelemetryAgentLogOn2016" /disable >nul
 schtasks /change /tn "Microsoft\Office\OfficeTelemetryAgentFallBack2016" /disable >nul
 schtasks /change /tn "Microsoft\Office\OfficeTelemetryAgentLogOn2016" /disable >nul
-schtasks /change /tn "Microsoft\Office\OfficeTelemetryAgentFallBack" /disable
+schtasks /change /tn "Microsoft\Office\OfficeTelemetryAgentFallBack" /disable >nul
 schtasks /change /tn "Microsoft\Office\OfficeTelemetryAgentLogOn" /disable >nul
 schtasks /change /tn "Microsoft\Office\Office 15 Subscription Heartbeat" /disable >nul
 schtasks /change /tn "Microsoft\Windows\Maintenance\WinSAT" /disable >nul
-schtasks /change /tn "Microsoft\Windows\Autochk\Proxy" /disable >nul
 schtasks /change /tn "Microsoft\Windows\PI\Sqm-Tasks" /disable >nul
 schtasks /change /tn "Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable >nul
 schtasks /change /tn "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable >nul
@@ -141,13 +137,15 @@ schtasks /change /tn "Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnostic
 schtasks /change /tn "Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" /disable >nul
 schtasks /change /tn "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable >nul
 schtasks /change /tn "Microsoft\Windows\WindowsUpdate\Scheduled Start" /disable >nul
-schtasks /change /tn "Microsoft\Windows\Application Experience\AitAgent" /disable >
+schtasks /change /tn "Microsoft\Windows\Application Experience\AitAgent" /disable >nul
 schtasks /change /tn "Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScanAfterUpdate" /disable >nul
 schtasks /change /tn "Microsoft\Windows\UpdateOrchestrator\Start Oobe Expedite Work" /disable >nul
 schtasks /change /tn "Microsoft\Windows\UpdateOrchestrator\Schedule Scan" /disable >nul
 
-
 :: --- SERVICES ---
+:: DO NOT DISABLED DRIVERS IT'S FOR BSOD AND SERVICES.
+:: If you want to disable all services, you can lose the functionality of the system, catch bugs. I do not advise disabling the full system
+:: MAY DISABLED TELEMETRY/UPDATE/PEN
 echo  !B_BLACK!Configuring Services...
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e967-e325-11ce-bfc1-08002be10318}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "" /f >nul
@@ -188,14 +186,14 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\wuauserv" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\RemoteRegistry" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\p2pimsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\p2psvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Wecsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\dosvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\lfsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 
-echo  !B_BLACK!Disabled Tamper Protection
-reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f >nul
+echo  !B_BLACK!Configiration Windows Defender
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableGenericRePorts" /t REG_DWORD /d "1" /f >nul
+@REM Reg.exe add "HKLM\Software\Policies\Microsoft\Windows Defender\CoreService" /v "DisableCoreService1DSTelemetry" /t REG_DWORD /d "1" /f
 
 :: --- TWEAKS REGEDIT/GPEDIT ---
 echo  !B_BLACK!Configuring tweaks regedit...
@@ -220,7 +218,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Class\USB\0000" /v "IdleEnab
 Reg.exe add "HKCU\Control Panel\Keyboard" /v "InitialKeyboardIndicators" /t REG_SZ /d "2" /f >nul
 Reg.exe add "HKCU\Control Panel\Keyboard" /v "KeyboardDelay" /t REG_SZ /d "0" /f >nul
 Reg.exe add "HKCU\Control Panel\Keyboard" /v "KeyboardSpeed" /t REG_SZ /d "31" /f >nul
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\501a4d13-42af-4429-9fd1-a8218c268e20\ee12f906-d277-404b-b6da-e5fa1a576df5" /v "SettingValue" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\d4e98f31-5ffe-4ce1-be31-1b38b384c009" /v "SettingValue" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\d4e98f31-5ffe-4ce1-be31-1b38b384c009\0" /v "SettingValue" /t REG_DWORD /d "0" /f >nul
@@ -307,7 +305,6 @@ Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "AllowInp
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\ControlSet001\Services\Ndu" /v "Start" /t REG_DWORD /d "4" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DistributeTimers" /t REG_DWORD /d "1" /f >nul
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "InterruptSteeringDisabled" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "PowerOffFrozenProcessors" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EnableWerUserReporting" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v "DisableTsx" /t REG_DWORD /d "1" /f >nul
@@ -1153,7 +1150,6 @@ Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\D
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount\$quietmomentscheduled$windows.data.notifications.quietmoment\Current" /v "Data" /t REG_BINARY /d "020000002E8A2D68F00BD8010000000043420100C20A01D21E284D006900630072006F0073006F00660074002E005100750069006500740048006F00750072007300500072006F00660069006C0065002E005000720069006F0072006900740079004F006E006C007900C22801D13280E0AA8A9930D13C80E0F6C5D50ECA500000" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DeviceCensus.exe" /v "Debugger" /t REG_SZ /d "%windir%\System32\taskkill.exe" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BingChatInstaller.exe" /v "Debugger" /t REG_SZ /d "%windir%\System32\taskkill.exe" /f >nul
-Reg.exe add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableGenericRePorts" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKCU\Software\Microsoft\Windows Security Health\State" /v "AccountProtection_MicrosoftAccount_Disconnected" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKU\.DEFAULT\Software\Microsoft\Windows Security Health\State" /v "AccountProtection_MicrosoftAccount_Disconnected" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v "EnableCortanaVoice" /t REG_DWORD /d "0" /f >nul
@@ -2069,6 +2065,7 @@ REG ADD "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "DoNotConnec
 REG ADD "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "UseWUServer" /t REG_DWORD /d "0" /f >nul
 
 echo  !B_BLACK!Configuring boot windows...
+@rem Creator couwthynokap
 powershell "ForEach($v in (Get-Command -Name \"Set-ProcessMitigation\").Parameters[\"Disable\"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString() -ErrorAction SilentlyContinue}"
 powershell "Remove-Item -Path \"HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\" -Recurse -ErrorAction SilentlyContinue"
 powershell -Command "Get-ScheduledTask | Where-Object { $_.TaskName -notin @('MsCtfMonitor') } | Disable-ScheduledTask"
