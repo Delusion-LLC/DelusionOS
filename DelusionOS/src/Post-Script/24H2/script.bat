@@ -193,7 +193,8 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\lfsvc" /v "Start" /t REG_DWORD /
 echo  !B_BLACK!Configiration Windows Defender
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableGenericRePorts" /t REG_DWORD /d "1" /f >nul
-@REM Reg.exe add "HKLM\Software\Policies\Microsoft\Windows Defender\CoreService" /v "DisableCoreService1DSTelemetry" /t REG_DWORD /d "1" /f
+powershell Set-MpPreferences -DisableCoreServiceTelemetry $true
+powershell Set-MpPreferences -DisableCoreServiceECSIntegration $true
 
 :: --- TWEAKS REGEDIT/GPEDIT ---
 echo  !B_BLACK!Configuring tweaks regedit...
