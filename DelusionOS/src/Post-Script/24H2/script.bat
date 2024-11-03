@@ -10,17 +10,16 @@ DISM >nul || (
 )
 
 :: Delusion LLC
-:: working for script - hickerdicker, couwthynokap, clqwnless, e1uen
 :: license Attribution-NonCommercial 4.0 International
 
 call :colors
-timeout /t 3 /nobreak > NUL
+timeout /t 3 /nobreak >nul
 
 echo  !B_BLACK!Execution Policy To Unrestricted...
-C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine -Force"
-C:\Windows\MinSudo.exe --NoLogo --TrustedInstaller --Privileged cmd /c "powershell Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force"
-PowerShell -NonInteractive -NoLogo -NoProfile -Command "Disable-MMAgent -mc"
-PowerShell -NonInteractive -NoLogo -NoProfile -Command "Disable-WindowsErrorReporting"
+powershell Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine -Force
+powershell Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force
+PowerShell -NonInteractive -NoLogo -Command "Disable-MMAgent -mc"
+PowerShell -NonInteractive -NoLogo -Command "Disable-WindowsErrorReporting"
 
 setx DOTNET_CLI_TELEMETRY_OPTOUT 1 & setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul
 
@@ -29,9 +28,8 @@ net accounts /maxpwage:unlimited >nul
 for %s in ("SysWOW64" "System32") do (if exist "%windir%\%~s\OneDriveSetup.exe" ("%windir%\%~s\OneDriveSetup.exe" /uninstall)) && reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f >nul
 rd /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
 taskkill /f /im smartscreen.exe >nul & ren C:\Windows\System32\smartscreen.exe smartscreen.exee
-PowerShell Get-AppxPackage | Where-Object { $_.Name -notlike "*Microsoft.WindowsStore*" -and $_.Name -notlike "*AppInstaller*" -and $_.Name -notlike "*Xbox.TCUI*" -and $_.Name -notlike "*XboxApp*" -and $_.Name -notlike "*XboxGameCallableUI*" -and $_.Name -notlike "*XboxGameOverlay*" -and $_.Name -notlike "*Xbox.TCUI*" -and $_.Name -notlike "*XboxGameOverlay*" -and $_.Name -notlike "*XboxGamingOverlay*" -and $_.Name -notlike "*XboxIdenitity*" -and $_.Name -notlike "*XboxSpeechToTextOverlay*" -and $_.Name -notlike "*SecHealthUI*" -and $_.Name -notlike "*Microsoft.Notepad*" } | Remove-AppxPackage
 Reg.exe add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "C:\%windir%\deluos.jpg" /f >nul
-timeout /t 1 /nobreak > NUL
+timeout /t 3 /nobreak >nul
 
 :: --- Packages DelusionOS ---
 echo  !S_GRAY!Install Visual AIO Libraries..
@@ -81,6 +79,8 @@ powershell.exe -command "Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi 
 reg add "HKCU\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f >nul
 reg add "HKCU\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f >nul
 reg add "HKCU\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f >nul
+
+timeout /t 3 /nobreak >nul
 
 :: --- SCHEDULED TASKS ---
 :: DO NOT DISABLED SCHEDULED TASKS IT'S FOR BSOD.
@@ -142,6 +142,8 @@ schtasks /change /tn "Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScanAfte
 schtasks /change /tn "Microsoft\Windows\UpdateOrchestrator\Start Oobe Expedite Work" /disable >nul
 schtasks /change /tn "Microsoft\Windows\UpdateOrchestrator\Schedule Scan" /disable >nul
 
+timeout /t 3 /nobreak >nul
+
 :: --- SERVICES ---
 :: DO NOT DISABLED DRIVERS IT'S FOR BSOD AND SERVICES.
 :: If you want to disable all services, you can lose the functionality of the system, catch bugs. I do not advise disabling the full system
@@ -152,6 +154,8 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "UpperFilters" /t REG_MULTI_SZ /d "" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dhcp" /v "DependOnService" /t REG_MULTI_SZ /d "NSI\0Afd" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache" /v "DependOnService" /t REG_MULTI_SZ /d "nsi" /f >nul
+
+timeout /t 1 /nobreak >nul
 
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\wercplsupport" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\DPS" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -175,8 +179,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\PenService" /v "Start" /t REG_DW
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\ssh-agent" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\sedsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\PcaSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\UevAgentService" /v "Start" /t REG_DWORD /d "4" /f >nul
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\UevAgentDriver" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\TroubleshootingSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\SharedRealitySvc" /v "Start" /t REG_DWORD /d "4" /f >nul
@@ -190,11 +192,12 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\Wecsvc" /v "Start" /t REG_DWORD 
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\dosvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\lfsvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 
+timeout /t 2 /nobreak >nul
+
 echo  !B_BLACK!Configiration Windows Defender
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableGenericRePorts" /t REG_DWORD /d "1" /f >nul
 powershell Set-MpPreferences -DisableCoreServiceTelemetry $true
-powershell Set-MpPreferences -DisableCoreServiceECSIntegration $true
 
 :: --- TWEAKS REGEDIT/GPEDIT ---
 echo  !B_BLACK!Configuring tweaks regedit...
@@ -308,7 +311,8 @@ Reg.exe add "HKLM\SYSTEM\ControlSet001\Services\Ndu" /v "Start" /t REG_DWORD /d 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DistributeTimers" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "PowerOffFrozenProcessors" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EnableWerUserReporting" /t REG_DWORD /d "0" /f >nul
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v "DisableTsx" /t REG_DWORD /d "1" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v "DisableExceptionChainValidation" /t REG_DWORD /d "1" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v "KernelSEHOPEnabled" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /v "value" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_EFSEFeatureFlags" /t REG_DWORD /d "0" /f >nul
@@ -324,7 +328,6 @@ Reg.exe delete "HKCU\SOFTWARE\Microsoft\GameBar" /v "ShowStartupPanel" /f >nul
 Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /f >nul
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /v "value" /t REG_DWORD /d "1" /f >nul
-
 Reg.exe add "HKCU\Software\Microsoft\GameBar" /v "ShowStartupPanel" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\Software\Microsoft\GameBar" /v "GamePanelStartupTipIndex" /t REG_DWORD /d "3" /f >nul
 Reg.exe add "HKCU\Software\Microsoft\GameBar" /v "AllowAutoGameMode" /t REG_DWORD /d "0" /f >nul
@@ -987,14 +990,12 @@ Reg.exe add "HKU\.DEFAULT\Microsoft\Windows\CurrentVersion\Internet Settings" /v
 Reg.exe add "HKU\.DEFAULT\Microsoft\Windows\CurrentVersion\Internet Settings" /v "WarnonBadCertRecving" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKU\.DEFAULT\Microsoft\Windows\CurrentVersion\Internet Settings" /v "WarnOnPostRedirect" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKU\.DEFAULT\Microsoft\Windows\CurrentVersion\Internet Settings" /v "SyncMode5" /t REG_DWORD /d "3" /f >nul
-
 Reg.exe add "HKCU\SOFTWARE\Valve\Steam" /v "SmoothScrollWebViews" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\SOFTWARE\Valve\Steam" /v "DWriteEnable" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\SOFTWARE\Valve\Steam" /v "StartupMode" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\SOFTWARE\Valve\Steam" /v "H264HWAccel" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\SOFTWARE\Valve\Steam" /v "DPIScaling" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKCU\SOFTWARE\Valve\Steam" /v "GPUAccelWebViews" /t REG_DWORD /d "0" /f >nul
-
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings" /v "CertificateRevocation" /t REG_DWORD /d "1" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings" /v "DisableCachingOfSSLPages" /t REG_DWORD /d "0" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings" /v "PrivacyAdvanced" /t REG_DWORD /d "1" /f >nul
@@ -1106,7 +1107,6 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessMana
 Reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks" /v "Value" /t REG_SZ /d "Deny" /f >nul
 Reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat" /v "Value" /t REG_SZ /d "Deny" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios" /v "Value" /t REG_SZ /d "Deny" /f >nul
-Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync" /v "Value" /t REG_SZ /d "Deny" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\documentsLibrary" /v "Value" /t REG_SZ /d "Deny" /f >nul
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\downloadsFolder" /v "Value" /t REG_SZ /d "Deny" /f >nul
@@ -2109,7 +2109,7 @@ label C: DelusionOS 24H2 >nul
 
 powercfg -import "%windir%\deluos.pow" 00000000-16f6-45a6-9fcf-0fa130b83c01 >nul
 powercfg -setactive 00000000-16f6-45a6-9fcf-0fa130b83c01 >nul
-powercfg -changename 00000000-16f6-45a6-9fcf-0fa130b83c01 "DelusionOS" "dsc.gg/delusionos" >nul
+powercfg -changename 00000000-16f6-45a6-9fcf-0fa130b83c01 "DelusionOS" "dsc.gg/deluos" >nul
 powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >nul
 for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~l/Diagnostic /e:false)
 
@@ -2264,6 +2264,10 @@ reg add "HKLM\SYSTEM\ResourcePolicyStore\ResourceSets\Policies\Memory\NoCap" /v 
 
 echo  !B_BLACK!Configuration Internet Tweaks....
 @rem Creator couwthynokap
+netsh winsock set autotuning on
+netsh advfirewall set allprofiles state on
+netsh int udp set global uro=enabled
+powershell "Get-NetAdapter -IncludeHidden | Set-NetIPInterface -WeakHostSend Enabled -WeakHostReceive Enabled -ErrorAction SilentlyContinue"
 netsh int tcp set supplemental Template=Internet CongestionProvider=bbr2
 netsh int tcp set supplemental Template=Datacenter CongestionProvider=bbr2
 netsh int tcp set supplemental Template=Compat CongestionProvider=bbr2
@@ -2451,23 +2455,13 @@ echo  !B_BLACK!Disabling NetBIOS over TCP/UPD...
     )
 )
 
-echo  !B_BLACK!Disabling Exclusive Mode On Audio Devices...
-for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},3" /t REG_DWORD /d "0" /f >nul
-for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},4" /t REG_DWORD /d "0" /f >nul
-for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},3" /t REG_DWORD /d "0" /f >nul
-for /f "delims=" %%e in ('reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render') do Reg.exe add "%%e\Properties" /v "{b3f8fa53-0004-438e-9003-51a46e139bfc},4" /t REG_DWORD /d "0" /f >nul
-
 echo  !S_GRAY!Clean Regedit / DirectX Shader Cache
-reg delete HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6} /f
-reg delete HKCR\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6} /f
-reg delete "HKCU\Printers" /f >nul
-reg delete "HKLM\SYSTEM\ControlSet001\Control\Print" /f >nul
 reg delete "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Font Drivers" /v "Adobe Type Manager" /f >nul
 reg delete "HKLM\System\ControlSet001\Control\Terminal Server\Wds" /v "StartupPrograms" /f >nul
 DISM /Online /Remove-Capability /CapabilityName:MathRecognizer0.0.1.0 /norestart /quiet >nul
 DISM /Online /Remove-Capability /CapabilityName:Microsoft.Windows.PowerShell.ISE0.0.1.0 /norestart /quiet >nul
 cleanmgr /sageset:0
-shutdown -r -t 10
+shutdown -r -t 10 -c "restart PC to 10 sec"
 
 :colors
 set "CMDLINE=S_GRAY=[90m,S_GREEN=[92m,S_YELLOW=[93m,S_WHITE=[97m,B_BLACK=[40m,UNDERLINE=[4m,_UNDERLINE=[24m"
