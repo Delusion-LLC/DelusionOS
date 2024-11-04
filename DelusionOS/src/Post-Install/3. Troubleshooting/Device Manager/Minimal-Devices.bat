@@ -1,5 +1,4 @@
 @echo off
-devmanview.exe /disable "Motherboard Resources"
 devmanview.exe /disable "PCI Data Acquisition and Signal Processing Controller"
 devmanview.exe /disable "PCI Encryption/Decryption Controller"
 devmanview.exe /disable "PCI Simple Communications Controller"

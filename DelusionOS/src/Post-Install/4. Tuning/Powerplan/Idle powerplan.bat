@@ -12,11 +12,11 @@ if /i %c% equ 1 goto :disable
 if /i %c% equ 2 goto :enable
 
 :disable
-powercfg /setacvalueindex scheme_current sub_processor 5d76a2ca-e8c0-402f-a133-2158492d58ad 1 && powercfg /setactive scheme_current
+powercfg /setacvalueindex scheme_current sub_processor 00000000-16f6-45a6-9fcf-0fa130b83c01 1 && powercfg /setactive scheme_current
 pause
 exit
 
 :enable
-powercfg /setacvalueindex scheme_current sub_processor 5d76a2ca-e8c0-402f-a133-2158492d58ad 0 && powercfg /setactive scheme_current
+powercfg /setacvalueindex scheme_current sub_processor 00000000-16f6-45a6-9fcf-0fa130b83c01 0 && powercfg /setactive scheme_current
 pause
 exit
