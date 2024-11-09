@@ -22,10 +22,10 @@
 - Windows Sandbox
 - Windows Autopilot <!-- Recall -->
 - Hyper-V
-- Оповещения
+- Уведомления
 - Microsoft Store
 - NFC/POS устройства
-- Кортана
+- Cortana
 - Обновления Windows
 #### Другие компоненты, которые не требуют всеобщей огласки
 
