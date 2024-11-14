@@ -92,6 +92,41 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "S
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_IrisRecommendations" /t REG_DWORD /d "0" /f >nul
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_AccountNotifications" /t REG_DWORD /d "0" /f >nul
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "0" /f >nul
+
+bcdedit /set x2apicpolicy enable
+bcdedit /set uselegacyapicmode no
+bcdedit /set bootux disabled
+bcdedit /set useplatformclock false
+bcdedit /set hypervisorlaunchtype off
+bcdedit /set quietboot yes
+bcdedit /timeout 3
+bcdedit /set {globalsettings} custom:16000067 true
+bcdedit /set {globalsettings} custom:16000068 true
+bcdedit /set {globalsettings} custom:16000069 true
+bcdedit /set bootmenupolicy legacy
+bcdedit /set allowedinmemorysettings 0 
+bcdedit /set useplatformtick yes
+bcdedit /set tscsyncpolicy enhanced
+bcdedit /set vsmlaunchtype Off
+bcdedit /set forcefipscrypto No
+bcdedit /set tpmbootentropy ForceDisable
+bcdedit /set debug No
+bcdedit /deletevalue usefirmwarepcisettings
+bcdedit /set quietboot Yes
+bcdedit /set x2apicpolicy disable
+bcdedit /set uselegacyapicmode yes
+bcdedit /set ems No
+bcdedit /set bootems No 
+bcdedit /set perfmem 0 
+bcdedit /set configflags 0 
+bcdedit /set integrityservices disable
+bcdedit /set bootux Disabled
+bcdedit /set hypervisorlaunchtype Off
+bcdedit /set nx AlwaysOff
+bcdedit /set tpmbootentropy ForceDisable
+bcdedit /set bootlog no
+bcdedit /event off
+bcdedit /bootdebug off
 bcdedit /set description "DelusionOS 24H2" >nul
 label C:DelusionOS
 net accounts /maxpwage:unlimited
