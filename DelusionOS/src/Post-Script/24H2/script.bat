@@ -100,6 +100,8 @@ powercfg -setactive 00000000-16f6-45a6-9fcf-0fa130b83c01 >nul
 powercfg -changename 00000000-16f6-45a6-9fcf-0fa130b83c01 "DelusionOS" "dsc.gg/deluos" >nul
 powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >nul
 for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~a/Diagnostic /e:false)
+powercfg -change -disk-timeout-ac 0
+powercfg -change -disk-timeout-dc 0
 cls
 
 echo  !B_BLACK!Disabling Windows Defender
