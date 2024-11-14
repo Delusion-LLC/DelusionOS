@@ -34,6 +34,15 @@ powershell.exe -command "Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi 
 fsutil behavior set disable8dot3 1 >nul
 fsutil behavior set disablelastaccess 1 >nul
 
+:: --- Packages DelusionOS ---
+echo  !S_GRAY!Install Visual AIO Libraries..
+"%windir%\Visual AIO.exe" /aiA /gm2 >nul
+
+echo  !S_GRAY!Install DirectX...
+"%windir%\dxwebsetup.exe" /silent >nul
+
+cls
+
 echo  !B_BLACK!Setting up personalization
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f >nul
 PowerRun.exe reg add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "Attributes" /t REG_DWORD /d "2962489444" /f
@@ -86,6 +95,11 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "T
 bcdedit /set description "DelusionOS 24H2" >nul
 label C:DelusionOS
 net accounts /maxpwage:unlimited
+powercfg -import "%windir%\deluos.pow" 00000000-16f6-45a6-9fcf-0fa130b83c01 >nul
+powercfg -setactive 00000000-16f6-45a6-9fcf-0fa130b83c01 >nul
+powercfg -changename 00000000-16f6-45a6-9fcf-0fa130b83c01 "DelusionOS" "dsc.gg/deluos" >nul
+powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >nul
+for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~a/Diagnostic /e:false)
 cls
 
 echo  !B_BLACK!Disabling Windows Defender
@@ -548,7 +562,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl" /v "LogEvent" /t RE
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl" /v "Overwrite" /t REG_DWORD /d "0" /f >nul
 cls
 
-echo  !B_BLACK!Fast AltTab
+echo  !B_BLACK!Configuration AltTab
 reg add "HKCU\System\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "0" /f >nul
 reg add "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f >nul
 reg delete "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehavior" /f >nul
