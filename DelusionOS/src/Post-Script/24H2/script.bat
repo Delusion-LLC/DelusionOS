@@ -708,6 +708,7 @@ sc config P9RdrService start= disabled >nul
 sc config PenService start= disabled >nul
 sc config SysMain start= disabled >nul
 sc config WSearch start= disabled >nul
+sc config Server start= disabled >nul
 sc config NetBIOS start= disabled >nul
 sc config NetBT start= disabled >nul
 sc config wercplsupport start= disabled >nul
