@@ -18,12 +18,15 @@ timeout /t 2 /nobreak >nul
 taskkill /f /im explorer.exe 
 
 echo  !B_BLACK!Execution Policy To Unrestricted...
-powershell Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine -Force
-powershell Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force
+powershell "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine -Force"
+powershell "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser -Force"
 PowerShell "Disable-MMAgent -mc"
 PowerShell "Disable-WindowsErrorReporting"
 PowerShell "Disable-MMAgent -PageCombining"
 PowerShell "Disable-MMAgent -ApplicationPreLaunch"
+PowerShell "manage-bde -off C:"
+PowerShell "Disable-BitLocker -MountPoint C:"
+PowerShell "Clear-WindowsDiagnosticData -force"
 
 setx DOTNET_CLI_TELEMETRY_OPTOUT 1 & setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul
 
