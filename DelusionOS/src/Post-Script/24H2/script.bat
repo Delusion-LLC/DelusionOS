@@ -128,7 +128,7 @@ bcdedit /set tpmbootentropy ForceDisable
 bcdedit /set bootlog no
 bcdedit /event off
 bcdedit /bootdebug off
-bcdedit /set description "DelusionOS 24H2" >nul
+bcdedit /set description "DelusionOS 24H2"
 label C:DelusionOS
 net accounts /maxpwage:unlimited
 powercfg -import "%windir%\deluos.pow" 00000000-16f6-45a6-9fcf-0fa130b83c01 >nul
@@ -137,7 +137,6 @@ powercfg -changename 00000000-16f6-45a6-9fcf-0fa130b83c01 "DelusionOS" "dsc.gg/d
 powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >nul
 for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~a/Diagnostic /e:false)
 powercfg -change -disk-timeout-ac 0
-powercfg -change -disk-timeout-dc 0
 cls
 
 echo  !B_BLACK!Disabling Windows Defender
@@ -312,6 +311,7 @@ reg add "HKLM\SYSTEM\ControlSet001\Services\DiagTrack" /v "Start" /t REG_DWORD /
 reg add "HKLM\SYSTEM\ControlSet001\Services\dmwappushservice" /v "Start" /t REG_DWORD /d "4" /f >nul
 reg add "HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f >nul
 reg add "HKLM\SOFTWARE\Policies\Microsoft\WMDRM" /v "DisableOnline" /t REG_DWORD /d "1" /f >nul
+reg add "HKCU\SOFTWARE\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy" /v "HasAccepted" /t REG_DWORD /d "0" /f >nul 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\{A8804298-2D5F-42E3-9531-9C8C39EB29CE}" /v "Value" /t REG_SZ /d "Deny" /f >nul
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\LooselyCoupled" /v "Value" /t REG_SZ /d "Deny" /f >nul
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CredUI" /v "DisablePasswordReveal" /t REG_DWORD /d "1" /f >nul
@@ -365,8 +365,8 @@ reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /t REG_DWO
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d "0" /f >nul
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d "0" /f >nul
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d "0" /f >nul
-schtasks /end /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator"
 
+schtasks /end /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" >nul
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable >nul
 
 schtasks /end /tn "\Microsoft\Windows\Customer Experience Improvement Program\BthSQM" >nul
@@ -892,7 +892,7 @@ for /f "tokens=1,2*" %%i in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\C
 )
 
 echo  !B_BLACK!Disabling NetBIOS over TCP/UPD...
-    for /f "delims=" %%u in ('reg query "HKLM\System\CurrentControlSet\Services\NetBT\Parameters\Interfaces" /s /f "NetbiosOptions" ^| findstr "HKEY"') do (
+for /f "delims=" %%u in ('reg query "HKLM\System\CurrentControlSet\Services\NetBT\Parameters\Interfaces" /s /f "NetbiosOptions" ^| findstr "HKEY"') do (
         Reg.exe add "%%u" /v "NetbiosOptions" /t REG_DWORD /d "2" /f >nul
     )
 )
