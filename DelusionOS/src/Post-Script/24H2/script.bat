@@ -17,15 +17,14 @@ timeout /t 2 /nobreak >nul
 
 taskkill /f /im explorer.exe 
 
-echo  !B_BLACK!Execution Policy To Unrestricted...
-powershell "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine -Force"
-powershell "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser -Force"
+echo  !B_BLACK!Execution Policy Windows...
+powershell "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine -Force"
+powershell "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser -Force"
 PowerShell "Disable-MMAgent -mc"
 PowerShell "Disable-WindowsErrorReporting"
 PowerShell "Disable-MMAgent -PageCombining"
 PowerShell "Disable-MMAgent -ApplicationPreLaunch"
 PowerShell "manage-bde -off C:"
-PowerShell "Disable-BitLocker -MountPoint C:"
 PowerShell "Clear-WindowsDiagnosticData -force"
 
 setx DOTNET_CLI_TELEMETRY_OPTOUT 1 & setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul
@@ -44,13 +43,14 @@ echo  !S_GRAY!Install Visual AIO Libraries..
 echo  !S_GRAY!Install DirectX...
 "%windir%\dxwebsetup.exe" /silent >nul
 
-cls
-
-echo  !B_BLACK!Setting up personalization
+echo  !B_BLACK!Setting up personalization...
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f >nul
-PowerRun.exe reg add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "Attributes" /t REG_DWORD /d "2962489444" /f
-reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}" /f >nul
-reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /f >nul
+reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2" /v "" /t REG_SZ /d "" /f >nul
+reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /v "" /t REG_SZ /d "" /f >nul
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Manufacturer" /t REG_SZ /d "DelusionOS 11" /f >nul
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model" /t REG_SZ /d "DelusionOS 24H2" /f >nul
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "https://dsc.gg/deluos/" /f >nul
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportPhone" /t REG_SZ /d "https://dsc.gg/deluos/" /f >nul
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d "1" /f >nul
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d "0" /f >nul
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Hidden" /t REG_DWORD /d "1" /f >nul
@@ -142,7 +142,7 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
 powercfg -change -disk-timeout-ac 0
 cls
 
-echo  !B_BLACK!Disabling Windows Defender
+echo  !B_BLACK!Disabling Windows Defender...
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f >nul
 powershell Set-MpPreferences -DisableCoreServiceTelemetry $true
 powershell "Set-MpPreference -DisableRealtimeMonitoring 1"
@@ -198,7 +198,7 @@ for %%e in (
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:windowsdefender;windowsupdate;windowsinsider;pen;notifications;windowsupdate-action;windowsupdate-history;windowsupdate-restartoptions;windowsupdate-options;backup;findmydevice;troubleshoot;recovery;privacy-speechtyping;workplace;" /f >nul
 cls
 
-echo  !B_BLACK!Disabling SmartScreen
+echo  !B_BLACK!Disabling SmartScreen...
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d "0" /f >nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorUser" /t REG_DWORD /d "0" /f >nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableInstallerDetection" /t REG_DWORD /d "0" /f >nul
@@ -219,18 +219,18 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScree
 taskkill /f /im smartscreen.exe & ren %windir%\System32\smartscreen.exe smartscreen.exee
 cls
 
-echo  !B_BLACK!Debload mobsync
+echo  !B_BLACK!Debload mobsync...
 del "%windir%\System32\mobsync.exe"
 del "%windir%\SysWOW64\mobsync.exe"
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\OneSyncSvc" /v "Start" /t REG_DWORD /d "4" /f >nul
 cls
 
-echo  !B_BLACK!Debload Onedrive
+echo  !B_BLACK!Debload Onedrive...
 "%windir%\System32\OneDriveSetup.exe" /uninstall
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f >nul
 cls
 
-echo  !B_BLACK!Disabling Auto Installing App
+echo  !B_BLACK!Disabling Auto Installing App...
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d "0" /f >nul
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d "0" /f >nul
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d "0" /f >nul
@@ -239,7 +239,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore" /v "AutoDownload" /t REG_DWORD /d "2" /f >nul
 cls
 
-echo  !B_BLACK!Debload Edge Update
+echo  !B_BLACK!Debload Edge Update...
 for %%z in (MicrosoftEdgeUpdate WidgetService Widgets msedge msedgewebview2) do taskkill /f /im %%z.exe
 
 reg add "HKLM\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d "1" /f >nul
@@ -248,7 +248,7 @@ reg add "HKLM\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdateDev" /v "AllowUninstall" 
 rd /s /q "%programfiles(x86)%\Microsoft\EdgeUpdate"
 cls
 
-echo  !B_BLACK!Deletion Of All Telemetry
+echo  !B_BLACK!Deletion Of All Telemetry...
 Reg.exe add "HKCU\Software\Microsoft\Office\Common\ClientTelemetry" /v "DisableTelemetry" /t REG_DWORD /d "1" /f >nul
 schtasks /change /tn "Microsoft\Windows\Maintenance\WinSAT" /disable >nul
 schtasks /change /tn "Microsoft\Windows\Autochk\Proxy" /disable >nul
@@ -603,7 +603,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl" /v "LogEvent" /t RE
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\CrashControl" /v "Overwrite" /t REG_DWORD /d "0" /f >nul
 cls
 
-echo  !B_BLACK!Configuration AltTab
+echo  !B_BLACK!Configuration AltTab...
 reg add "HKCU\System\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "0" /f >nul
 reg add "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f >nul
 reg delete "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehavior" /f >nul
@@ -627,7 +627,7 @@ if %errorlevel% equ 0 (
     )
 )
 
-echo  !B_BLACK!Configuration Device Manager
+echo  !B_BLACK!Configuration Device Manager...
 devmanview.exe /disable "PCI Data Acquisition and Signal Processing Controller"
 devmanview.exe /disable "PCI Encryption/Decryption Controller"
 devmanview.exe /disable "PCI Simple Communications Controller"
@@ -659,7 +659,7 @@ devmanview.exe /disable "Composite Bus Enumerator"
 devmanview.exe /disable "NDIS Virtual Network Adapter Enumerator"
 devmanview.exe /disable "UMBus Root Bus Enumerator"
 
-echo  !B_BLACK!Shutting Down Unnecessary Services
+echo  !B_BLACK!Shutting Down Unnecessary Services...
 sc config DPS start= disabled >nul
 sc config TrkWks start= disabled >nul
 sc config Telemetry start= disabled >nul
@@ -716,7 +716,7 @@ sc config NetBIOS start= disabled >nul
 sc config NetBT start= disabled >nul
 sc config wercplsupport start= disabled >nul
 
-echo Edit Registry Settings
+echo Edit Registry Settings...
 Reg.exe add "HKLM\System\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f >nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "IoPriority" /t REG_DWORD /d "3" /f >nul
@@ -727,6 +727,20 @@ reg add "HKCU\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d "0
 reg add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "0" /f >nul
 reg add "HKCU\Control Panel\Accessibility\ToggleKeys" /v "Flags" /t REG_SZ /d "0" /f >nul
 
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\501a4d13-42af-4429-9fd1-a8218c268e20\ee12f906-d277-404b-b6da-e5fa1a576df5" /v "SettingValue" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\d4e98f31-5ffe-4ce1-be31-1b38b384c009" /v "SettingValue" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\2a737441-1930-4402-8d77-b2bebba308a3\d4e98f31-5ffe-4ce1-be31-1b38b384c009\0" /v "SettingValue" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\4faab71a-92e5-4726-b531-224559672d19" /v "SettingValue" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\2E601130-5351-4d9d-8E04-252966BAD054\D502F7EE-1DC7-4EFD-A55D-F04B6F5C0545" /v "SettingValue" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\238C9FA8-0AAD-41ED-83F4-97BE242C8F20\25DFA149-5DD1-4736-B5AB-E8A37B5B8187" /v "SettingValue" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DistributeTimers" /t REG_DWORD /d "1" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "PowerOffFrozenProcessors" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EnableWerUserReporting" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v "DisableExceptionChainValidation" /t REG_DWORD /d "1" /f >nul
+Reg.exe add "HKLM\SOFTWARE\Microsoft\FTH" /v "Enabled" /t REG_DWORD /d "0" /f >nul
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v "KernelSEHOPEnabled" /t REG_DWORD /d "0" /f >nul
+
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NoLazyMode" /t REG_DWORD /d "1" /f >nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NetworkThrottlingIndex" /t REG_DWORD /d "10" /f >nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "SystemResponsiveness" /t REG_DWORD /d "10" /f >nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableVirtualization" /t REG_DWORD /d "0" /f >nul
@@ -747,7 +761,6 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "RestrictImpl
 reg add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "1" /f >nul
 reg add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "1" /f >nul
 reg add "HKCU\Software\Microsoft\InputPersonalization\TrainedDataStore" /v "HarvestContacts" /t REG_DWORD /d "0" /f >nul
-reg add "HKCU\Software\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPolicy" /t REG_DWORD /d "0" /f >nul
 reg add "HKCU\Control Panel\Desktop" /v "CursorBlinkRate" /t REG_SZ /d "-1" /f >nul
 reg add "HKLM\SYSTEM\ControlSet001\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d "24" /f >nul
 reg add "HKLM\SYSTEM\CurrentControlSet\services\NDIS\Parameters" /v "TrackNblOwner" /t REG_DWORD /d "2" /f >nul
