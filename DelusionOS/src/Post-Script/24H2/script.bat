@@ -716,7 +716,7 @@ sc config NetBIOS start= disabled >nul
 sc config NetBT start= disabled >nul
 sc config wercplsupport start= disabled >nul
 
-echo Edit Registry Settings...
+echo  !B_BLACK!Edit Registry Settings...
 Reg.exe add "HKLM\System\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f >nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v "IoPriority" /t REG_DWORD /d "3" /f >nul
