@@ -50,6 +50,7 @@
 - [🤖 Discord](https://dsc.gg/delusionos/)
 - [✉️ Telegram](https://t.me/DelusionGroup/)
 - [🐤 Twitter](https://x.com/DelusionLLC/)
+- [donationalerts.com/delusion_llc](https://www.donationalerts.com/r/delusion_llc)
 
 <a href="https://star-history.com/#Delusion-LLC/DelusionOS&Date">
  <picture>
