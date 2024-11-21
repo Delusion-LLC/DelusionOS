@@ -1,11 +1,10 @@
 ## 📌 Information
 
-[24H2 Tracker Build's](https://github.com/Delusion-LLC/DelusionOS/blob/main/DelusionOS/24H2.md)
-
 [Q&A](https://github.com/Delusion-LLC/DelusionOS/blob/main/DelusionOS/Q&A.md)
 
 #### 🌐 Change language
-*[China](https://github.com/Delusion-LLC/DelusionOS/blob/main/README-ZH.md)* , *[Russian](https://github.com/Delusion-LLC/DelusionOS/blob/main/README-RU.md)*
+*[China](https://github.com/Delusion-LLC/DelusionOS/blob/main/README-ZH.md)*
+*[Russian](https://github.com/Delusion-LLC/DelusionOS/blob/main/README-RU.md)*
 
 ---
 
@@ -14,6 +13,7 @@
 - Windows 12 25H2 `---`
 -->
 - Windows 11 24H2 `26100`
+- Windows 11 23H2 `22631`
 
 ## Unsupported List:
 - Install the image via "setup.exe" / Media Creation Tool (useless Rufus / Ventoy or other deployment utilities).
@@ -31,7 +31,6 @@
 #### Other components that do not require general publicity
 
 ## ©️ Acknowledgments
-[Amitxv](https://twitter.com/amitxv),
 [Bored](https://twitter.com/Bra1nlet),
 [Calypto](https://twitter.com/CaIypto),
 [CatGamerOP](https://twitter.com/CatGamerOP),
@@ -49,8 +48,8 @@
 - [🌎 Website](https://deluos.vercel.app/)
 - [🤖 Discord](https://dsc.gg/delusionos/)
 - [✉️ Telegram](https://t.me/DelusionGroup/)
-- [🐤 Twitter](https://x.com/DelusionLLC/)
-- [💸 donation](https://www.donationalerts.com/r/delusion_llc)
+- [🐤 X (Twitter)](https://x.com/DelusionLLC/)
+- [💸 donation for support project](https://www.donationalerts.com/r/delusion_llc)
 
 <a href="https://star-history.com/#Delusion-LLC/DelusionOS&Date">
  <picture>
