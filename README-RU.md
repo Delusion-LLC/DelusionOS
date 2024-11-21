@@ -1,17 +1,15 @@
 ## 📌 Информация
 
-[24H2 Tracker Build's](https://github.com/Delusion-LLC/DelusionOS/blob/main/DelusionOS/24H2.md)
-
 [Вопросы и ответы на них](https://github.com/Delusion-LLC/DelusionOS/blob/main/DelusionOS/Q&A.md)
 
 ---
-
 
 ## Поддерживаемые сборки:
 <!--
 - Windows 12 25H2 `---`
 -->
 - Windows 11 24H2 `26100`
+- Windows 11 23H2 `22631
 
 ## Неподдерживаемый список:
 - Установите образ с помощью «setup.exe» / Инструмент создания мультимедийных файлов (Rufus / Ventoy или другие утилиты развертывания).
@@ -30,7 +28,6 @@
 #### Другие компоненты, которые не требуют всеобщей огласки
 
 ## ©️ Благодарность
-[Amitxv](https://twitter.com/amitxv),
 [Bored](https://twitter.com/Bra1nlet),
 [Calypto](https://twitter.com/CaIypto),
 [CatGamerOP](https://twitter.com/CatGamerOP),
@@ -41,14 +38,14 @@
 [clqwnless](https://github.com/clqwnless),
 [couwthynokap](https://github.com/couwthynokap),
 [hickerdicker](https://github.com/hickerdicker),
-[NTLite команда](https://www.ntlite.com/community/index.php),
+[NTLite Team](https://www.ntlite.com/community/index.php),
 [Spddl](https://github.com/spddl), и т.д
 
 ## 🔗 Ссылки
 - [🌎 Веб-сайт](https://deluos.vercel.app/)
 - [🤖 Discord](https://dsc.gg/delusionos/)
 - [✉️ Telegram](https://t.me/DelusionGroup/)
-- [🐤 Twitter](https://x.com/DelusionLLC/)
+- [🐤 X (Twitter)](https://x.com/DelusionLLC/)
 
 <a href="https://star-history.com/#Delusion-LLC/DelusionOS&Date">
  <picture>
