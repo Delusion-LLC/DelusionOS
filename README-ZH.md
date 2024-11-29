@@ -19,7 +19,9 @@
 - Windows 備份/還原點
 - Windows 沙箱
 - Windows 自動駕駛儀 <!-- 召回 -->
-- 超V
+- HyperV
+- Modem
+- Xbox
 - 通知
 - NFC/POS 設備
 - 科塔娜
