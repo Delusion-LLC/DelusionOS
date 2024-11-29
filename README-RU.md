@@ -20,6 +20,8 @@
 - Windows Sandbox
 - Windows Autopilot <!-- Recall -->
 - Hyper-V
+- Модем
+- Xbox
 - Уведомления
 - Microsoft Store
 - NFC/POS устройства
