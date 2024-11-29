@@ -23,6 +23,8 @@
 - Windows Backup/Restore Points
 - Windows Sandbox
 - Windows Autopilot <!-- Recall -->
+- Modem
+- Xbox
 - Hyper-V
 - Notifications
 - NFC/POS devices
