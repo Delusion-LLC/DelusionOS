@@ -1,0 +1,12 @@
+@echo off
+title Improving security with SMB...
+
+echo Please write for A (to ALL apply)
+powershell -Command "Enable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol"
+powershell -Command "Enable-WindowsOptionalFeature -Online -FeatureName SMB2Protocol"
+
+echo Please write for A (to ALL apply)
+powershell -Command "Set-SmbServerConfiguration -EnableSMB1Protocol $true"
+powershell -Command "Set-SmbServerConfiguration -EnableSMB2Protocol $true"
+
+shutdown /r /t 3
