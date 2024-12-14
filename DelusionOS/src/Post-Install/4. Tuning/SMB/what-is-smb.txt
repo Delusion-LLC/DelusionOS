@@ -1,0 +1,1 @@
+SMB is a communication protocol used to share files, printers, serial ports, and miscellaneous communications between nodes on a network. On Microsoft Windows, the SMB implementation consists of two vaguely named Windows services: "Server" and "Workstation". 
