@@ -1,18 +1,13 @@
 ## 📌 訊息
 
-[問答](https://github.com/Delusion-LLC/DelusionOS/blob/main/DelusionOS/Q&A.md)
-
 ---
 
 ## 支援的版本：
-<!--
-- Windows 12 25H2 `---`
--->
-- Windows 11 24H2 `26100`
+<!-- - Windows 11 24H2 `26100` -->
 - Windows 11 23H2 `22631`
 
 ## 不支援的清單：
-- 透過「setup.exe」/媒體建立工具（無用的Rufus/Ventoy或其他部署實用程式）安裝映像。
+- 透過 [setup.exe] /媒體建立工具（無用的Rufus/Ventoy或其他部署實用程式）安裝映像。
 - Bitlocker 磁碟機加密
 - 語音識別
 - Windows 防禦者
@@ -45,7 +40,7 @@
 ## 🔗 鏈接
 - [🌎 網站](https://deluos.vercel.app/)
 - [🤖 不和諧](https://dsc.gg/delusionos/)
-- [✉️電報](https://t.me/DelusionGroup/)
+- [✉️電報](https://t.me/+_AGse0FWWldlZTZi)
 - [🐤 X (嘰嘰喳喳)](https://x.com/DelusionLLC/)
 
 <a href="https://star-history.com/#Delusion-LLC/DelusionOS&Date">
