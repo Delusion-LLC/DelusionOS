@@ -1,7 +1,5 @@
 ## 📌 Information
 
-[Q&A](https://github.com/Delusion-LLC/DelusionOS/blob/main/DelusionOS/Q&A.md)
-
 #### 🌐 Change language
 *[China](https://github.com/Delusion-LLC/DelusionOS/blob/main/README-ZH.md)*
 *[Russian](https://github.com/Delusion-LLC/DelusionOS/blob/main/README-RU.md)*
@@ -9,10 +7,7 @@
 ---
 
 ## Supported Builds:
-<!--
-- Windows 12 25H2 `---`
--->
-- Windows 11 24H2 `26100`
+<!-- - Windows 11 24H2 `26100` -->
 - Windows 11 23H2 `22631`
 
 ## Unsupported List:
@@ -49,7 +44,7 @@
 ## 🔗 Links
 - [🌎 Website](https://deluos.vercel.app/)
 - [🤖 Discord](https://dsc.gg/delusionos/)
-- [✉️ Telegram](https://t.me/DelusionGroup/)
+- [✉️ Telegram](https://t.me/+_AGse0FWWldlZTZi)
 - [🐤 X (Twitter)](https://x.com/DelusionLLC/)
 - [💸 donation for support project](https://www.donationalerts.com/r/delusion_llc)
 
