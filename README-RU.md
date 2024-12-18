@@ -1,18 +1,15 @@
 ## 📌 Информация
 
-[Вопросы и ответы на них](https://github.com/Delusion-LLC/DelusionOS/blob/main/DelusionOS/Q&A.md)
+![AerialOS](https://github.com/user-attachments/assets/1d3ee0a5-5f65-4f77-9fa8-724ba5f88206)
 
 ---
 
 ## Поддерживаемые сборки:
-<!--
-- Windows 12 25H2 `---`
--->
-- Windows 11 24H2 `26100`
+<!-- - Windows 11 24H2 `26100` -->
 - Windows 11 23H2 `22631
 
 ## Неподдерживаемый список:
-- Установите образ с помощью «setup.exe» / Инструмент создания мультимедийных файлов (Rufus / Ventoy или другие утилиты развертывания).
+- Установите образ с помощью [setup.exe] / Инструмент создания мультимедийных файлов (Rufus / Ventoy или другие утилиты развертывания).
 - Bitlocker Drive Encryption
 - Windows To Go
 - Распознавание речи
@@ -46,7 +43,7 @@
 ## 🔗 Ссылки
 - [🌎 Веб-сайт](https://deluos.vercel.app/)
 - [🤖 Discord](https://dsc.gg/delusionos/)
-- [✉️ Telegram](https://t.me/DelusionGroup/)
+- [✉️ Telegram](https://t.me/+_AGse0FWWldlZTZi)
 - [🐤 X (Twitter)](https://x.com/DelusionLLC/)
 
 <a href="https://star-history.com/#Delusion-LLC/DelusionOS&Date">
