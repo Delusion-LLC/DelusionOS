@@ -1,5 +1,7 @@
 ## 📌 Information
 
+![AerialOS](https://github.com/user-attachments/assets/1d3ee0a5-5f65-4f77-9fa8-724ba5f88206)
+
 #### 🌐 Change language
 *[China](https://github.com/Delusion-LLC/DelusionOS/blob/main/README-ZH.md)*
 *[Russian](https://github.com/Delusion-LLC/DelusionOS/blob/main/README-RU.md)*
