@@ -50,10 +50,14 @@
 - [🐤 X (Twitter)](https://x.com/DelusionLLC/)
 - [💸 donation for support project](https://www.donationalerts.com/r/delusion_llc)
 
-<a href="https://star-history.com/#Delusion-LLC/DelusionOS&Date">
+## Star History
+
+## Star History
+
+<a href="https://star-history.com/#Aerial-LLC/AerialOS&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date" />
  </picture>
 </a>
