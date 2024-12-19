@@ -41,15 +41,15 @@
 [Spddl](https://github.com/spddl), и т.д
 
 ## 🔗 Ссылки
-- [🌎 Веб-сайт](https://deluos.vercel.app/)
-- [🤖 Discord](https://dsc.gg/delusionos/)
+- [🌎 Веб-сайт](https://aerialos.vercel.app/)
+- [🤖 Discord](https://dsc.gg/aerialos/)
 - [✉️ Telegram](https://t.me/+_AGse0FWWldlZTZi)
-- [🐤 X (Twitter)](https://x.com/DelusionLLC/)
+- [🐤 X (Twitter)](https://x.com/e1uen_/)
 
-<a href="https://star-history.com/#Delusion-LLC/DelusionOS&Date">
+<a href="https://star-history.com/#Aerial-LLC/AerialOS&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date" />
  </picture>
 </a>

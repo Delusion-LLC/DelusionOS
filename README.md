@@ -44,16 +44,16 @@
 [Spddl](https://github.com/spddl), and etc.
 
 ## 🔗 Links
-- [🌎 Website](https://deluos.vercel.app/)
-- [🤖 Discord](https://dsc.gg/delusionos/)
+- [🌎 Website](https://aerialos.vercel.app/)
+- [🤖 Discord](https://dsc.gg/aerialos/)
 - [✉️ Telegram](https://t.me/+_AGse0FWWldlZTZi)
-- [🐤 X (Twitter)](https://x.com/DelusionLLC/)
-- [💸 donation for support project](https://www.donationalerts.com/r/delusion_llc)
+- [🐤 X (Twitter)](https://x.com/e1uen_/)
+- [💸 donation for support project](https://www.donationalerts.com/r/AERIAL_LLC)
 
-<a href="https://star-history.com/#Delusion-LLC/DelusionOS&Date">
+<a href="https://star-history.com/#Aerial-LLC/AerialOS&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date" />
  </picture>
 </a>

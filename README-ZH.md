@@ -40,15 +40,15 @@
 [Spddl](https://github.com/spddl), 等等。
 
 ## 🔗 鏈接
-- [🌎 網站](https://deluos.vercel.app/)
-- [🤖 不和諧](https://dsc.gg/delusionos/)
+- [🌎 網站](https://aerialos.vercel.app/)
+- [🤖 不和諧](https://dsc.gg/aerialos/)
 - [✉️電報](https://t.me/+_AGse0FWWldlZTZi)
-- [🐤 X (嘰嘰喳喳)](https://x.com/DelusionLLC/)
+- [🐤 X (嘰嘰喳喳)](https://x.com/e1uen_/)
 
-<a href="https://star-history.com/#Delusion-LLC/DelusionOS&Date">
+<a href="https://star-history.com/#Aerial-LLC/AerialOS&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Delusion-LLC/DelusionOS&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Aerial-LLC/AerialOS&type=Date" />
  </picture>
 </a>
